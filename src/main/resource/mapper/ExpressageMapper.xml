@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.expressage.mapper.ExpressageMapper">
+    <select id="getAllExpressageInfo" resultType="Expressage" parameterType="java.util.Map">
+        select * from expressage
+    </select>
+    <select id="getMyExpressageInfo" resultType="Expressage" parameterType="java.util.Map">
+        select * from expressage where 1 = 1
+        <choose>
+            <when test="role == 2">
+                and uid = #{uid}
+            </when>
+            <otherwise>
+                and delivery_id = #{uid}
+            </otherwise>
+        </choose>
+    </select>
+    <insert id="addExpressageInfo" parameterType="com.expressage.entity.Expressage">
+        insert into expressage (expressage_code,expressage_recipient_name,expressage_recipient_phone,expressage_logistics_company,
+        expressage_delivery_time,expressage_dormitory_number,expressage_delivery_status,uid,expressage_pay_status)
+        value (#{expressage_code},#{expressage_recipient_name},#{expressage_recipient_phone},#{expressage_logistics_company},
+        #{expressage_delivery_time},#{expressage_dormitory_number},#{expressage_delivery_status},#{uid},#{expressage_pay_status})
+    </insert>
+
+</mapper>
