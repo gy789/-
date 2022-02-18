@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,13 +31,13 @@ public class ExpressageController {
         return "/expressage/MyExpressage";
     }
 
-    @RequestMapping("/ ")
+    @RequestMapping("/addexpressageinfo")
     public String AddExpressageInfo(Expressage expressage, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
         expressage.setUid(user.getUid());
         expressage.setExpressage_pay_status("待支付");
-        expressage.setExpressage_delivery_status("带配送");
+        expressage.setExpressage_delivery_status("待配送");
 
         int flag = expressageService.addExpressageInfo(expressage);
         if(flag > 0){
@@ -45,6 +47,19 @@ public class ExpressageController {
             return "addexpressageinfo";
         }
 
+    }
+
+    @RequestMapping("/skipExpressageInfo")
+    public String SkipExpressageInfo(Model model, @RequestParam("expressage_id")String param){
+        int expressage_id = Integer.parseInt(param);
+        Expressage expressage = expressageService.getOneExpressageInfo(expressage_id);
+        if(expressage == null){
+            model.addAttribute("error","系统异常");
+            return "/expressage/MyExpressage";
+        }
+        model.addAttribute("expressage",expressage);
+
+        return "/expressage/Oneexpressageinfo";
     }
 
 }

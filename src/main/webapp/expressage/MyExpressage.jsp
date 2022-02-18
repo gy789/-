@@ -17,12 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="${basePath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="${basePath}/ss/plugins/footable/footable.core.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="<%=basePath%>/expressage/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath%>/expressage/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath%>/expressage/css/plugins/footable/footable.core.css" rel="stylesheet">
 
-    <link href="${basePath}/css/animate.css" rel="stylesheet">
-    <link href="${basePath}/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath%>/expressage/css/animate.css" rel="stylesheet">
+    <link href="<%=basePath%>/expressage/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -47,6 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <th>物流公司</th>
                                             <th>配送状态</th>
                                             <th>支付状态</th>
+                                            <th>留言信息</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
@@ -60,10 +61,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td class="center">${myexpressage.expressage_logistics_company}</td>
                                             <td class="center">${myexpressage.expressage_delivery_status}</td>
                                             <td class="center">${myexpressage.expressage_pay_status}</td>
-                                            <td><a class="btn btn-info btn-rounded" href="/shop/admin/getusers?uid=${users.uid}">编辑</a>
+                                            <td class="center">${myexpressage.expressage_message}</td>
+                                            <td>
+                                                <c:if test="${myexpressage.expressage_delivery_status != '已配送'}">
+                                                <a class="btn btn-info btn-rounded" href="/expressage/skipExpressageInfo?expressage_id=${myexpressage.expressage_id}">编辑</a>
                                                 <a class="btn btn-warning btn-rounded" href="javaScript:void(0)">取消订单</a>
-                                                <c:if test="${myexpressage.expressage_delivery_status}== '已配送'">
-                                                <a class="btn btn-warning btn-rounded" href="javaScript:void(0)">支付</a>
+                                                </c:if>
+                                                <c:if test="${myexpressage.expressage_delivery_status == '已配送'}">
+                                                <a class="btn btn-primary  btn-rounded" href="javaScript:void(0)">支付</a>
                                                 </c:if>
                                                 <font style="color: red">${error}</font>
                                             </td>
@@ -84,13 +89,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     <!-- 全局js -->
-    <script src="${basePath}/js/jquery.min.js?v=2.1.4"></script>
-    <script src="${basePath}/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="${basePath}/js/plugins/footable/footable.all.min.js"></script>
+    <script src="<%=basePath%>/expressage/js/jquery.min.js?v=2.1.4"></script>
+    <script src="<%=basePath%>/expressage/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="<%=basePath%>/expressage/js/plugins/footable/footable.all.min.js"></script>
 
     <!-- 自定义js -->
-    <script src="${basePath}/js/content.js?v=1.0.0"></script>
-    <script src="${basePath}/js/deluser.js"></script>
+    <script src="<%=basePath%>/expressage/js/content.js?v=1.0.0"></script>
+    <script src="<%=basePath%>/expressage/js/deluser.js"></script>
     <script>
         $(document).ready(function() {
 

@@ -22,4 +22,9 @@
         #{expressage_delivery_time},#{expressage_dormitory_number},#{expressage_delivery_status},#{uid},#{expressage_pay_status})
     </insert>
 
+    <select id="getOneExpressageInfo" resultType="Expressage" parameterType="java.util.Map">
+        select * from expressage where expressage_id = #{expressage_id}
+    </select>
+
+
 </mapper>
