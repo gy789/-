@@ -4,6 +4,8 @@ import com.expressage.entity.Expressage;
 import com.expressage.entity.Users;
 import com.expressage.mapper.ExpressageMapper;
 import com.expressage.service.ExpressageService;
+import com.expressage.util.Msg;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ public class ExpressageController {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
         List<Expressage> myexpressages = expressageService.getMyExpressageInfo(user);
-        session.setAttribute("myexpressages",myexpressages);
+        model.addAttribute("myexpressages",myexpressages);
         return "/expressage/MyExpressage";
     }
 
@@ -41,7 +43,7 @@ public class ExpressageController {
 
         int flag = expressageService.addExpressageInfo(expressage);
         if(flag > 0){
-            return "";
+            return "redirect:/myexpressage";
         }else {
             model.addAttribute("errorMsg","添加失败");
             return "addexpressageinfo";
@@ -61,5 +63,16 @@ public class ExpressageController {
 
         return "/expressage/Oneexpressageinfo";
     }
+
+    @RequestMapping("/updateStatus")
+    @ResponseBody
+    public Msg UpdateStatus(@RequestParam("expressage_id")String expressage_id,@RequestParam("type")String type){
+        int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type));
+        if (flag > 0){
+            return Msg.success("成功");
+        }
+        return Msg.fail("失败");
+    }
+
 
 }

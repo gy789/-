@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                        
                     </div>
                     <div class="ibox-content">
-                        <form method="post" action="<%=basePath%>expressage/addexpressageinfo" class="form-horizontal">
+                        <form method="post" action="<%=basePath%>addexpressageinfo" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">收件人姓名</label>
 

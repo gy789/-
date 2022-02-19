@@ -17,14 +17,36 @@
     </select>
     <insert id="addExpressageInfo" parameterType="com.expressage.entity.Expressage">
         insert into expressage (expressage_code,expressage_recipient_name,expressage_recipient_phone,expressage_logistics_company,
-        expressage_delivery_time,expressage_dormitory_number,expressage_delivery_status,uid,expressage_pay_status)
+        expressage_delivery_time,expressage_dormitory_number,expressage_delivery_status,uid,expressage_pay_status,expressage_recipient_status)
         value (#{expressage_code},#{expressage_recipient_name},#{expressage_recipient_phone},#{expressage_logistics_company},
-        #{expressage_delivery_time},#{expressage_dormitory_number},#{expressage_delivery_status},#{uid},#{expressage_pay_status})
+        #{expressage_delivery_time},#{expressage_dormitory_number},#{expressage_delivery_status},#{uid},#{expressage_pay_status},#{expressage_recipient_status})
     </insert>
 
     <select id="getOneExpressageInfo" resultType="Expressage" parameterType="java.util.Map">
         select * from expressage where expressage_id = #{expressage_id}
     </select>
+
+    <update id="updateExpressageInfo" parameterType="java.lang.String">
+        update expressage
+        <choose>
+            <when test="type == 0">
+                set expressage_delivery_status = '配送中'
+            </when>
+            <when test="type == 1">
+                set expressage_delivery_status = '已配送'
+            </when>
+            <when test="type == 2">
+                set expressage_recipient_status = 1
+            </when>
+            <when test="type == 3">
+                set expressage_pay_status = '已支付'
+            </when>
+            <otherwise>
+                set expressage_id = expressgage_id
+            </otherwise>
+        </choose>
+        where expressage_id = #{expressage_id}
+    </update>
 
 
 </mapper>

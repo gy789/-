@@ -55,6 +55,7 @@ public class CreateMenu {
 				printSubMenu(m);
 				sb.append("\n</ul>");
 				sb.append("</li>");
+				sb.append("<li class=\"line dk\"></li>");
 			}
 		}
 		sb.append("\n</ul>");
@@ -70,8 +71,36 @@ public class CreateMenu {
 		List<Menu> subList = getSubMenu(menu);
 		
 		for(Menu m : subList) {
+			List<Menu> thirdList = getSubMenu(m);
+			if (thirdList.size() > 0){
+				sb.append("<li>");
+				sb.append("<a id=" + m.getMenu_id() + " href="+m.getHref()+">"+m.getMenu_name()+" <span class=\"fa arrow\"></span></a>");
+				printThirdMenu(m);
+				sb.append("</li>");
+			}
+			else {
+				sb.append("\n<li id=" + m.getMenu_id() + "><a class=\"J_menuItem\" href=\"" + m.getHref() + "\">" + m.getMenu_name() + "</a></li>");
+			}
+			break;
+
+		}
+	}
+
+	/**
+	 * 将三级菜单拼接stringbuffer中
+	 * @param menu
+	 */
+	private void printThirdMenu(Menu menu){
+		// 子菜单集合
+		List<Menu> subList = getSubMenu(menu);
+
+		sb.append("<ul class=\"nav nav-third-level\">");
+
+		for (Menu m : subList){
 			sb.append("\n<li id=" + m.getMenu_id() + "><a class=\"J_menuItem\" href=\""+m.getHref()+"\">"+m.getMenu_name()+"</a></li>");
 		}
+		sb.append("</ul");
+
 	}
 	
 	/**
@@ -87,8 +116,9 @@ public class CreateMenu {
 				subList.add(m);
 			}                            
 		}
-		
 		return subList;
 	}
+
+
 
 }

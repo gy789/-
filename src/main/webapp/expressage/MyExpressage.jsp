@@ -63,13 +63,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td class="center">${myexpressage.expressage_pay_status}</td>
                                             <td class="center">${myexpressage.expressage_message}</td>
                                             <td>
-                                                <c:if test="${myexpressage.expressage_delivery_status != '已配送'}">
-                                                <a class="btn btn-info btn-rounded" href="/expressage/skipExpressageInfo?expressage_id=${myexpressage.expressage_id}">编辑</a>
-                                                <a class="btn btn-warning btn-rounded" href="javaScript:void(0)">取消订单</a>
-                                                </c:if>
-                                                <c:if test="${myexpressage.expressage_delivery_status == '已配送'}">
-                                                <a class="btn btn-primary  btn-rounded" href="javaScript:void(0)">支付</a>
-                                                </c:if>
+                                                <a class="btn btn-info btn-rounded" href="/expressage/skipExpressageInfo?expressage_id=${myexpressage.expressage_id}">查看详情</a>
+                                                <c:choose>
+                                                    <c:when test="${myexpressage.expressage_delivery_status != '待配送' && myexpressage.expressage_recipient_status == false}">
+                                                        <a class="btn btn-success btn-rounded"
+                                                        <c:if test="${myexpressage.expressage_delivery_status == '配送中'}">
+                                                                    style="pointer-events: none"
+                                                    </c:if> href="javaScript:void(0)">确认收货
+                                                            <span style="display:none;">${myexpressage.expressage_id}</span>
+                                                        </a>
+                                                    </c:when>
+                                                    <c:when test="${myexpressage.expressage_recipient_status == true && myexpressage.expressage_pay_status == '待支付'}">
+                                                        <a class="btn btn-primary  btn-rounded" href="javaScript:void(0)">确认支付
+                                                            <span style="display:none;">${myexpressage.expressage_id}</span>
+                                                        </a>
+                                                    </c:when>
+                                                    <c:when test="${myexpressage.expressage_delivery_status == '待配送'}">
+                                                        <a class="btn btn-warning btn-rounded" href="javaScript:void(0)">取消订单
+                                                            <span style="display:none;">${myexpressage.expressage_id}</span>
+                                                        </a>
+                                                    </c:when>
+                                                </c:choose>
                                                 <font style="color: red">${error}</font>
                                             </td>
                                         </tr>
@@ -95,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 自定义js -->
     <script src="<%=basePath%>/expressage/js/content.js?v=1.0.0"></script>
-    <script src="<%=basePath%>/expressage/js/deluser.js"></script>
+    <script src="<%=basePath%>/expressage/js/MyExpressage.js"></script>
     <script>
         $(document).ready(function() {
 

@@ -15,25 +15,14 @@ public class Expressage {
     private int uid;//用户id
     private String expressage_pay_status;//支付状态
     private int delivery_id;//配送人员ID
+    private boolean expressage_recipient_status;//是否确认收货
 
-    @Override
-    public String toString() {
-        return "Expressage{" +
-                "expressage_id=" + expressage_id +
-                ", expressage_code='" + expressage_code + '\'' +
-                ", expressage_recipient_name='" + expressage_recipient_name + '\'' +
-                ", expressage_recipient_phone='" + expressage_recipient_phone + '\'' +
-                ", expressage_logistics_company='" + expressage_logistics_company + '\'' +
-                ", expressage_delivery_time='" + expressage_delivery_time + '\'' +
-                ", expressage_dormitory_number='" + expressage_dormitory_number + '\'' +
-                ", expressage_message='" + expressage_message + '\'' +
-                ", expressage_delivery_status='" + expressage_delivery_status + '\'' +
-                ", create_time='" + create_time + '\'' +
-                ", update_time='" + update_time + '\'' +
-                ", uid=" + uid +
-                ", expressage_pay_status='" + expressage_pay_status + '\'' +
-                ", delivery_id=" + delivery_id +
-                '}';
+    public boolean isExpressage_recipient_status() {
+        return expressage_recipient_status;
+    }
+
+    public void setExpressage_recipient_status(boolean expressage_recipient_status) {
+        this.expressage_recipient_status = expressage_recipient_status;
     }
 
     public int getDelivery_id() {
@@ -148,4 +137,24 @@ public class Expressage {
         this.uid = uid;
     }
 
+    @Override
+    public String toString() {
+        return "Expressage{" +
+                "expressage_id=" + expressage_id +
+                ", expressage_code='" + expressage_code + '\'' +
+                ", expressage_recipient_name='" + expressage_recipient_name + '\'' +
+                ", expressage_recipient_phone='" + expressage_recipient_phone + '\'' +
+                ", expressage_logistics_company='" + expressage_logistics_company + '\'' +
+                ", expressage_delivery_time='" + expressage_delivery_time + '\'' +
+                ", expressage_dormitory_number='" + expressage_dormitory_number + '\'' +
+                ", expressage_message='" + expressage_message + '\'' +
+                ", expressage_delivery_status='" + expressage_delivery_status + '\'' +
+                ", create_time='" + create_time + '\'' +
+                ", update_time='" + update_time + '\'' +
+                ", uid=" + uid +
+                ", expressage_pay_status='" + expressage_pay_status + '\'' +
+                ", delivery_id=" + delivery_id +
+                ", expressage_recipient_status=" + expressage_recipient_status +
+                '}';
+    }
 }
