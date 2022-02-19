@@ -2,7 +2,6 @@ package com.expressage.controller;
 
 import com.expressage.entity.Expressage;
 import com.expressage.entity.Users;
-import com.expressage.mapper.ExpressageMapper;
 import com.expressage.service.ExpressageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ public class ExpressageController {
         return "/expressage/MyExpressage";
     }
 
-    @RequestMapping("/ ")
+    @RequestMapping("/addexpressageinfo")
     public String AddExpressageInfo(Expressage expressage, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
