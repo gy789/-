@@ -81,7 +81,6 @@ public class CreateMenu {
 			else {
 				sb.append("\n<li id=" + m.getMenu_id() + "><a class=\"J_menuItem\" href=\"" + m.getHref() + "\">" + m.getMenu_name() + "</a></li>");
 			}
-			break;
 
 		}
 	}
@@ -99,7 +98,7 @@ public class CreateMenu {
 		for (Menu m : subList){
 			sb.append("\n<li id=" + m.getMenu_id() + "><a class=\"J_menuItem\" href=\""+m.getHref()+"\">"+m.getMenu_name()+"</a></li>");
 		}
-		sb.append("</ul");
+		sb.append("</ul>");
 
 	}
 	

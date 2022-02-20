@@ -2,7 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.expressage.mapper.ExpressageMapper">
     <select id="getAllExpressageInfo" resultType="Expressage" parameterType="java.util.Map">
-        select * from expressage
+        select * from expressage where 1 = 1
+        <choose>
+            <when test="type == 0">
+                and 1 = 1
+            </when>
+            <when test="type == 1">
+                and delivery_id is null
+            </when>
+        </choose>
     </select>
     <select id="getMyExpressageInfo" resultType="Expressage" parameterType="java.util.Map">
         select * from expressage where 1 = 1
@@ -30,7 +38,8 @@
         update expressage
         <choose>
             <when test="type == 0">
-                set expressage_delivery_status = '配送中'
+                set expressage_delivery_status = '配送中',
+                delivery_id = #{user.uid}
             </when>
             <when test="type == 1">
                 set expressage_delivery_status = '已配送'

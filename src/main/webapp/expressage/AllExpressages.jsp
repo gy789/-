@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>我的快递</h5>
+                            <h5>快递列表</h5>
                         </div>
                         <div class="ibox-content">
 
@@ -62,36 +62,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td class="center">${myexpressage.expressage_message}</td>
                                             <td>
                                                 <a class="btn btn-info btn-rounded" href="/expressage/skipExpressageInfo?expressage_id=${myexpressage.expressage_id}">查看详情</a>
-                                            <c:if test="${user.role == 1}">
-                                                    <c:choose>
-                                                        <c:when test="${myexpressage.expressage_delivery_status == '配送中'}">
-                                                            <a class="btn btn-default btn-rounded" href="javaScript:void(0)">确认送达
-                                                                <span style="display:none;">${myexpressage.expressage_id}</span></a>
-                                                        </c:when>
-                                                    </c:choose>
+                                                <c:if test="${type == 1}">
+                                                    <a class="btn btn-danger btn-rounded" href="javaScript:void(0)">我要配送
+                                                    <span style="display:none;">${myexpressage.expressage_id}</span></a>
                                                 </c:if>
-                                                <c:if test="${user.role !=1}">
-                                                <c:choose>
-                                                    <c:when test="${myexpressage.expressage_delivery_status != '待配送' && myexpressage.expressage_recipient_status == false}">
-                                                        <a class="btn btn-success btn-rounded"
-                                                        <c:if test="${myexpressage.expressage_delivery_status == '配送中'}">
-                                                                    style="pointer-events: none"
-                                                    </c:if> href="javaScript:void(0)">确认收货
-                                                            <span style="display:none;">${myexpressage.expressage_id}</span>
-                                                        </a>
-                                                    </c:when>
-                                                    <c:when test="${myexpressage.expressage_recipient_status == true && myexpressage.expressage_pay_status == '待支付'}">
-                                                        <a class="btn btn-primary  btn-rounded" href="javaScript:void(0)">确认支付
-                                                            <span style="display:none;">${myexpressage.expressage_id}</span>
-                                                        </a>
-                                                    </c:when>
-                                                    <c:when test="${myexpressage.expressage_delivery_status == '待配送'}">
-                                                        <a class="btn btn-warning btn-rounded" href="javaScript:void(0)">取消订单
-                                                            <span style="display:none;">${myexpressage.expressage_id}</span>
-                                                        </a>
-                                                    </c:when>
-                                                </c:choose>
-                                                                </c:if>
                                                 <font style="color: red">${error}</font>
                                             </td>
                                         </tr>

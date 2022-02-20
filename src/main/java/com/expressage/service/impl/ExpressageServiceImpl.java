@@ -21,8 +21,8 @@ public class ExpressageServiceImpl implements ExpressageService {
     }
 
     @Override
-    public List<Expressage> getAllExpressageInfo() {
-        return expressageMapper.getAllExpressageInfo();
+    public List<Expressage> getAllExpressageInfo(int type) {
+        return expressageMapper.getAllExpressageInfo(type);
     }
 
     @Override
@@ -36,7 +36,8 @@ public class ExpressageServiceImpl implements ExpressageService {
     }
 
     @Override
-    public int updateExpressageInfo(int expressage_id, int type) {
-        return expressageMapper.updateExpressageInfo(expressage_id,type);
+    public int updateExpressageInfo(int expressage_id, int type,Users user) {
+        return expressageMapper.updateExpressageInfo(expressage_id,type,user);
     }
+
 }

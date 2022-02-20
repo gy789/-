@@ -5,6 +5,7 @@ import com.expressage.entity.Users;
 import com.expressage.mapper.ExpressageMapper;
 import com.expressage.service.ExpressageService;
 import com.expressage.util.Msg;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,12 +67,23 @@ public class ExpressageController {
 
     @RequestMapping("/updateStatus")
     @ResponseBody
-    public Msg UpdateStatus(@RequestParam("expressage_id")String expressage_id,@RequestParam("type")String type){
-        int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type));
+    public Msg UpdateStatus(@RequestParam("expressage_id")String expressage_id,@RequestParam("type")String type,
+                            HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type),user);
         if (flag > 0){
             return Msg.success("成功");
         }
         return Msg.fail("失败");
+    }
+
+    @RequestMapping("/undeliverylist")
+    public String UnDeliveryList(@RequestParam("type")String type, Model model){
+        List<Expressage> undeliverylist = expressageService.getAllExpressageInfo(Integer.parseInt(type));
+        model.addAttribute("myexpressages",undeliverylist);
+        model.addAttribute("type",type);
+        return "/expressage/AllExpressages";
     }
 
 
