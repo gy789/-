@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="description" content="">
 
     <link rel="shortcut icon" href="favicon.ico"> <link href="<%=basePath%>/expressage/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="<%=basePath%>/expressage/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath%>/expressage/css/font-awesome.css?v=4.7.0" rel="stylesheet">
     <link href="<%=basePath%>/expressage/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="<%=basePath%>/expressage/css/animate.css" rel="stylesheet">
     <link href="<%=basePath%>/expressage/css/style.css?v=4.1.0" rel="stylesheet">
@@ -26,12 +26,92 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="wrapper wrapper-content">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="row">
+            <div class="col-sm-5" <c:if test="${expressagestatus.start_status_time == null}"> style="display: none"</c:if>>
                 <div class="ibox float-e-margins">
+                    <div class="" id="ibox-content">
+
+                        <div id="vertical-timeline"  class="vertical-container light-timeline">
+                            <c:if test="${expressagestatus.compelete_pay_time != null}">
+                            <div class="vertical-timeline-block" >
+                                <div class="vertical-timeline-icon navy-bg">
+                                    <i class="fa fa-check-square"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>完成支付</h2>
+                                    <span class="vertical-date">
+                                    <small>${expressagestatus.compelete_pay_time}</small>
+                                </span>
+                                </div>
+                            </div>
+                            </c:if>
+
+                            <c:if test="${expressagestatus.recipient_status_time != null}">
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon blue-bg">
+                                    <i class="fa fa-handshake-o"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>确认收货</h2>
+                                    <span class="vertical-date"> <small>${expressagestatus.recipient_status_time}</small></span>
+                                </span>
+                                </div>
+                            </div>
+                            </c:if>
+
+                            <c:if test="${expressagestatus.compelete_delivery != null}">
+
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon lazur-bg">
+                                    <i class="fa fa-home"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>配送完成</h2>
+                                    <p>${expressage.expressage_message}
+                                    </p>
+                                    <span class="vertical-date"> <small>${expressagestatus.compelete_delivery}</small></span>
+                                </div>
+                            </div>
+                            </c:if>
+
+                            <c:if test="${expressagestatus.delivery_status_time != null}">
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon yellow-bg">
+                                    <i class="fa fa-truck"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>配送中</h2>
+                                    <span class="vertical-date"><small>${expressagestatus.delivery_status_time}</small></span>
+                                </div>
+                            </div>
+                            </c:if>
+
+                            <c:if test="${expressagestatus.start_status_time != null}">
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon lazur-bg">
+                                    <i class="fa fa-spinner"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>待配送</h2>
+                                    <span class="vertical-date"><small>${expressagestatus.start_status_time}</small></span>
+                                </div>
+                            </div>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="ibox">
                     <div class="ibox-title">
-                        <h5>个人快递信息填写</h5>
+                        <h5>快递详情</h5>
                        
                     </div>
                     <div class="ibox-content">
@@ -97,6 +177,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
 
@@ -106,7 +187,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 自定义js -->
     <script src="<%=basePath%>/expressage/js/content.js?v=1.0.0"></script>
-
+    <script src="<%=basePath%>/expressage/js/plugins/layer/layer.min.js"></script>
+    <!-- Flot -->
+    <script src="<%=basePath%>/expressage/js/plugins/flot/jquery.flot.js"></script>
+    <script src="<%=basePath%>/expressage/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="<%=basePath%>/expressage/js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="<%=basePath%>/expressage/js/plugins/flot/jquery.flot.pie.js"></script>
     <!-- iCheck -->
     <script src="<%=basePath%>/expressage/js/plugins/iCheck/icheck.min.js"></script>
     <script>
@@ -116,6 +202,90 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 radioClass: 'iradio_square-green',
             });
         });
+    </script>
+    <!--flotdemo-->
+    <script type="text/javascript">
+        $(function() {
+            var container = $("#flot-line-chart-moving");
+            var maximum = container.outerWidth() / 2 || 300;
+            var data = [];
+
+            function getRandomData() {
+                if (data.length) {
+                    data = data.slice(1);
+                }
+                while (data.length < maximum) {
+                    var previous = data.length ? data[data.length - 1] : 50;
+                    var y = previous + Math.random() * 10 - 5;
+                    data.push(y < 0 ? 0 : y > 100 ? 100 : y);
+                }
+                var res = [];
+                for (var i = 0; i < data.length; ++i) {
+                    res.push([i, data[i]])
+                }
+                return res;
+            }
+            series = [{
+                data: getRandomData(),
+                lines: {
+                    fill: true
+                }
+            }];
+            var plot = $.plot(container, series, {
+                grid: {
+
+                    color: "#999999",
+                    tickColor: "#f7f9fb",
+                    borderWidth:0,
+                    minBorderMargin: 20,
+                    labelMargin: 10,
+                    backgroundColor: {
+                        colors: ["#ffffff", "#ffffff"]
+                    },
+                    margin: {
+                        top: 8,
+                        bottom: 20,
+                        left: 20
+                    },
+                    markings: function(axes) {
+                        var markings = [];
+                        var xaxis = axes.xaxis;
+                        for (var x = Math.floor(xaxis.min); x < xaxis.max; x += xaxis.tickSize * 2) {
+                            markings.push({
+                                xaxis: {
+                                    from: x,
+                                    to: x + xaxis.tickSize
+                                },
+                                color: "#fff"
+                            });
+                        }
+                        return markings;
+                    }
+                },
+                colors: ["#4fc5ea"],
+                xaxis: {
+                    tickFormatter: function() {
+                        return "";
+                    }
+                },
+                yaxis: {
+                    min: 0,
+                    max: 110
+                },
+                legend: {
+                    show: true
+                }
+            });
+
+            // Update the random dataset at 25FPS for a smoothly-animating chart
+
+            setInterval(function updateRandom() {
+                series[0].data = getRandomData();
+                plot.setData(series);
+                plot.draw();
+            }, 40);
+        });
+
     </script>
 
     

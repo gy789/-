@@ -57,5 +57,35 @@
         where expressage_id = #{expressage_id}
     </update>
 
+    <insert id="addExpressageStatus" parameterType="com.expressage.entity.ExpressageStatus">
+      insert into expressagestatus(expressage_id,start_status_time) value(#{expressage_id},#{start_status_time})
+    </insert>
+
+    <update id="updateExpressageStatus" parameterType="java.lang.String">
+        update expressagestatus
+        <choose>
+            <when test="type == 0">
+                set delivery_status_time = now()
+            </when>
+            <when test="type == 1">
+                set compelete_delivery = now()
+            </when>
+            <when test="type == 2">
+                set recipient_status_time = now()
+            </when>
+            <when test="type == 3">
+                set compelete_pay_time = now()
+            </when>
+            <otherwise>
+                set expressage_id = expressgage_id
+            </otherwise>
+        </choose>
+        where expressage_id = #{expressage_id}
+    </update>
+
+    <select id="getOneExpressageStatus" resultType="ExpressageStatus" parameterType="java.util.Map">
+        select * from expressagestatus where expressage_id = #{expressage_id}
+    </select>
+
 
 </mapper>

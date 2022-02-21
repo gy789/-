@@ -1,6 +1,7 @@
 package com.expressage.controller;
 
 import com.expressage.entity.Expressage;
+import com.expressage.entity.ExpressageStatus;
 import com.expressage.entity.Users;
 import com.expressage.mapper.ExpressageMapper;
 import com.expressage.service.ExpressageService;
@@ -56,11 +57,14 @@ public class ExpressageController {
     public String SkipExpressageInfo(Model model, @RequestParam("expressage_id")String param){
         int expressage_id = Integer.parseInt(param);
         Expressage expressage = expressageService.getOneExpressageInfo(expressage_id);
-        if(expressage == null){
+        ExpressageStatus expressageStatus = expressageService.getOneExpressageStatus(expressage_id);
+
+        if(expressage == null && expressageStatus == null){
             model.addAttribute("error","系统异常");
             return "/expressage/MyExpressage";
         }
         model.addAttribute("expressage",expressage);
+        model.addAttribute("expressagestatus",expressageStatus);
 
         return "/expressage/Oneexpressageinfo";
     }
@@ -72,7 +76,8 @@ public class ExpressageController {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
         int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type),user);
-        if (flag > 0){
+        int flag1 = expressageService.updateExpressageStatus(Integer.parseInt(expressage_id),Integer.parseInt(type));
+        if (flag > 0 && flag1 > 0){
             return Msg.success("成功");
         }
         return Msg.fail("失败");

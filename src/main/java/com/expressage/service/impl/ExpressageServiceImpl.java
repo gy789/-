@@ -1,6 +1,7 @@
 package com.expressage.service.impl;
 
 import com.expressage.entity.Expressage;
+import com.expressage.entity.ExpressageStatus;
 import com.expressage.entity.Users;
 import com.expressage.mapper.ExpressageMapper;
 import com.expressage.service.ExpressageService;
@@ -40,4 +41,18 @@ public class ExpressageServiceImpl implements ExpressageService {
         return expressageMapper.updateExpressageInfo(expressage_id,type,user);
     }
 
+    @Override
+    public int addExpressageStatus(ExpressageStatus status) {
+        return expressageMapper.addExpressageStatus(status);
+    }
+
+    @Override
+    public int updateExpressageStatus(int expressage_id, int type) {
+        return expressageMapper.updateExpressageStatus(expressage_id,type);
+    }
+
+    @Override
+    public ExpressageStatus getOneExpressageStatus(int expressage_id) {
+        return expressageMapper.getOneExpressageStatus(expressage_id);
+    }
 }
