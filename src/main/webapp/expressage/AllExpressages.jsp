@@ -50,21 +50,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${myexpressages}" var="myexpressage">
+                                    <c:forEach items="${expressages}" var="expressage">
                                         <tr class="gradeX">
-                                            <td>${myexpressage.expressage_recipient_name}</td>
-                                            <td>${myexpressage.expressage_recipient_phone}
+                                            <td>${expressage.expressage_recipient_name}</td>
+                                            <td>${expressage.expressage_recipient_phone}
                                             </td>
-                                            <td>${myexpressage.expressage_code}</td>
-                                            <td class="center">${myexpressage.expressage_logistics_company}</td>
-                                            <td class="center">${myexpressage.expressage_delivery_status}</td>
-                                            <td class="center">${myexpressage.expressage_pay_status}</td>
-                                            <td class="center">${myexpressage.expressage_message}</td>
+                                            <td>${expressage.expressage_code}</td>
+                                            <td class="center">${expressage.expressage_logistics_company}</td>
+                                            <td class="center">${expressage.expressage_delivery_status}</td>
+                                            <td class="center">${expressage.expressage_pay_status}</td>
+                                            <td class="center">${expressage.expressage_message}</td>
                                             <td>
-                                                <a class="btn btn-info btn-rounded" href="/expressage/skipExpressageInfo?expressage_id=${myexpressage.expressage_id}">查看详情</a>
+                                                <a class="btn btn-info btn-rounded" href="/expressage/skipExpressageInfo?expressage_id=${expressage.expressage_id}">查看详情</a>
                                                 <c:if test="${type == 1}">
                                                     <a class="btn btn-danger btn-rounded" href="javaScript:void(0)">我要配送
-                                                    <span style="display:none;">${myexpressage.expressage_id}</span></a>
+                                                    <span style="display:none;">${expressage.expressage_id}</span></a>
                                                 </c:if>
                                                 <font style="color: red">${error}</font>
                                             </td>

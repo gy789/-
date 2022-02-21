@@ -78,10 +78,10 @@ public class ExpressageController {
         return Msg.fail("失败");
     }
 
-    @RequestMapping("/undeliverylist")
-    public String UnDeliveryList(@RequestParam("type")String type, Model model){
+    @RequestMapping("/expressagelist")
+    public String ExpressageList(@RequestParam("type")String type, Model model){
         List<Expressage> undeliverylist = expressageService.getAllExpressageInfo(Integer.parseInt(type));
-        model.addAttribute("myexpressages",undeliverylist);
+        model.addAttribute("expressages",undeliverylist);
         model.addAttribute("type",type);
         return "/expressage/AllExpressages";
     }
