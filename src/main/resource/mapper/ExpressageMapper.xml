@@ -42,7 +42,8 @@
                 delivery_id = #{user.uid}
             </when>
             <when test="type == 1">
-                set expressage_delivery_status = '已配送'
+                set expressage_delivery_status = '已配送',
+                expressage_message = #{message}
             </when>
             <when test="type == 2">
                 set expressage_recipient_status = 1

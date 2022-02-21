@@ -37,8 +37,8 @@ public class ExpressageServiceImpl implements ExpressageService {
     }
 
     @Override
-    public int updateExpressageInfo(int expressage_id, int type,Users user) {
-        return expressageMapper.updateExpressageInfo(expressage_id,type,user);
+    public int updateExpressageInfo(int expressage_id, int type,String message,Users user) {
+        return expressageMapper.updateExpressageInfo(expressage_id,type,message,user);
     }
 
     @Override

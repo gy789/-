@@ -72,10 +72,11 @@ public class ExpressageController {
     @RequestMapping("/updateStatus")
     @ResponseBody
     public Msg UpdateStatus(@RequestParam("expressage_id")String expressage_id,@RequestParam("type")String type,
-                            HttpServletRequest request){
+                            @RequestParam("prompt")String prompt,HttpServletRequest request){
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-        int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type),user);
+        String message = "取货地址："+prompt;
+        int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type),message,user);
         int flag1 = expressageService.updateExpressageStatus(Integer.parseInt(expressage_id),Integer.parseInt(type));
         if (flag > 0 && flag1 > 0){
             return Msg.success("成功");
