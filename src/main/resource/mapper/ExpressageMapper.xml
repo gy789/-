@@ -84,5 +84,9 @@
         select * from expressagestatus where expressage_id = #{expressage_id}
     </select>
 
+    <delete id="delExpressage" parameterType="java.lang.String">
+        delete from expressage where expressage_id = #{expressage_id}
+    </delete>
+
 
 </mapper>

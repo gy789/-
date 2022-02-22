@@ -1,12 +1,12 @@
 package com.expressage.controller;
 
-import com.expressage.entity.Expressage;
-import com.expressage.entity.ExpressageStatus;
-import com.expressage.entity.Message;
-import com.expressage.entity.Users;
+import com.expressage.entity.*;
+import com.expressage.mapper.CompanyMapper;
+import com.expressage.service.CompanyService;
 import com.expressage.service.ExpressageService;
 import com.expressage.service.MessageService;
 import com.expressage.util.Msg;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +28,10 @@ public class ExpressageController {
     @Autowired(required = false)
     private MessageService messageService;
 
+    @Autowired(required = false)
+    private CompanyService companyService;
+
+
     /**
      * 查询我的快递信息
      * 根据role判断（2:用户查询创建的订单；1：快递员查询配送的订单）
@@ -37,6 +41,8 @@ public class ExpressageController {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
         List<Expressage> myexpressages = expressageService.getMyExpressageInfo(user);
+        List<ExpressageCompany> companyList = companyService.getAllCompany();
+        session.setAttribute("companyList",companyList);
         model.addAttribute("myexpressages",myexpressages);
         return "/expressage/MyExpressage";
     }
@@ -87,15 +93,17 @@ public class ExpressageController {
     @RequestMapping("/updateStatus")
     @ResponseBody
     public Msg UpdateStatus(@RequestParam("expressage_id")String expressage_id,@RequestParam("type")String type,
-                            @RequestParam("prompt")String prompt,HttpServletRequest request){
+                            @RequestParam(value="prompt",required = false)String prompt,HttpServletRequest request){
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
         String message_info = "取货地址："+prompt;
         int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type),message_info,user);
         if(Integer.parseInt(type) == 1 && flag > 0){
+            Expressage expressage = expressageService.getOneExpressageInfo(Integer.parseInt(expressage_id));
+            String info = "你好：取件码"+expressage.getExpressage_code()+"的快递已到达"+prompt+"，请及时查收，谢谢！";
             Message message = new Message();
             message.setUid(user.getUid());
-            message.setMessage_info(message_info);
+            message.setMessage_info(info);
             message.setRead_status(false);
             messageService.addMessage(message);
         }
@@ -114,5 +122,24 @@ public class ExpressageController {
         return "/expressage/AllExpressages";
     }
 
+    @RequestMapping("/updateExpressage")
+    public String UpdateExpressage(Expressage expressage,Model model){
+        int flag = expressageService.updateExpressage(expressage);
+        if(flag > 1){
+            return "redirect:/myexpressage";
+        }
+        model.addAttribute("error","修改失败");
+        return "/expressage/Oneexpressageinfo";
+    }
+
+    @RequestMapping("/deleteExpressage")
+    @ResponseBody
+    public Msg DeleteExpressage(@Param("expressage_id")String expressage_id){
+        int flag = expressageService.delExpressage(Integer.parseInt(expressage_id));
+        if(flag > 0){
+            return Msg.success("成功");
+        }
+        return Msg.fail("失败");
+    }
 
 }

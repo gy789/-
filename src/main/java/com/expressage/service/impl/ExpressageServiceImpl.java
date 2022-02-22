@@ -51,4 +51,14 @@ public class ExpressageServiceImpl implements ExpressageService {
     public ExpressageStatus getOneExpressageStatus(int expressage_id) {
         return expressageMapper.getOneExpressageStatus(expressage_id);
     }
+
+    @Override
+    public int updateExpressage(Expressage expressage) {
+        return expressageMapper.updateExpressage(expressage);
+    }
+
+    @Override
+    public int delExpressage(int expressage_id) {
+        return expressageMapper.delExpressage(expressage_id);
+    }
 }

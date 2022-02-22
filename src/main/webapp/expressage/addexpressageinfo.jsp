@@ -64,9 +64,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <label class="col-sm-2 control-label">快递公司</label>
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" name="expressage_logistics_company">
-                                        <option class="role" value="0"></option>
-                                        <option class="role" value="2"></option>
-                                        <option class="role" value="1"></option>
+                                        <c:forEach items="${sessionScope.companyList}" var="company">
+                                        <option class="role" value="${company.expressagecompany_name}">${company.expressagecompany_name}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>

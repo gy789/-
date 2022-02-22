@@ -80,3 +80,29 @@ $(document).ready(function () {
         })
     })
 });
+
+/*我要配送按钮点击事件*/
+$(document).ready(function () {
+    $('.btn-warning').each(function () {
+        $(this).click(function () {
+            var expressage_id = $(this).children("span").text();
+            var bool = confirm("确定要删除吗？");
+            if (bool){
+                $.ajax({
+                    type: "POST",
+                    url: "/expressage/deleteExpressage",
+                    data: {
+                        expressage_id: expressage_id
+                    },
+                    success: function () {
+                        alert("成功");
+                        window.location.reload()
+                    },
+                    error: function () {
+                        alert("系统异常，修改失败");
+                    }
+                });
+            }
+        })
+    })
+});

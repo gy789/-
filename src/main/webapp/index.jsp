@@ -42,13 +42,22 @@
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="#">
-                        <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
+                <div class="navbar-header">
+                    <h2>&nbsp;&nbsp;欢迎进入校园快递代取系统</h2>
                 </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                        </a>
+
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                        </a>
+                    </li>
+                </ul>
             </nav>
         </div>
         <div class="row J_mainContent" id="content-main">
@@ -70,7 +79,7 @@
 <script type="text/javascript" src="expressage/js/index.js"></script>
 
 <!-- 第三方插件 -->
-<script src="js/plugins/pace/pace.min.js"></script>
+<script src="expressage/js/plugins/pace/pace.min.js"></script>
 
 </body>
 

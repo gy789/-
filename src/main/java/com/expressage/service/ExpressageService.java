@@ -15,5 +15,7 @@ public interface ExpressageService {
     int updateExpressageInfo(@Param("expressage_id")int expressage_id, @Param("type")int type,String message,Users user);//修改快递状态，type修改类型{0：开始配送，1：配送完成，2：确认收货，3：确认支付}
     int updateExpressageStatus(@Param("expressage_id")int expressage_id,@Param("type")int type);//修改状态节点表
     ExpressageStatus getOneExpressageStatus(int expressage_id);//得到一份快递信息状态
+    int updateExpressage(Expressage expressage);//修改快递详细信息
+    int delExpressage(int expressage_id);//删除快递详细（取消快递）
 
 }

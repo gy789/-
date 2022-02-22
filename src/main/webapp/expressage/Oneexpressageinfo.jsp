@@ -114,13 +114,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <h5>快递详情</h5>
                        
                     </div>
-                    <div class="ibox-content">
-                        <form method="post" action="<%=basePath%>/expressage/expressage/addexpressageinfo" class="form-horizontal">
+
+                    <div class="ibox-content" >
+                        <form method="post" action="<%=basePath%>/expressage/expressage/updateExpressage" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">收件人姓名</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" name="expressage_recipient_name" value="${expressage.expressage_recipient_name}" class="form-control">
+                                    <input type="text" name="expressage_recipient_name" value="${expressage.expressage_recipient_name}" class="form-control" />
+                                    <input type="text" name="expressage_id" value="${expressage.expressage_id}" style="display: none" />
                                 </div>
                             </div>
 							<div class="hr-line-dashed"></div>
@@ -145,9 +147,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" name="expressage_logistics_company">
                                         <option class="role" disabled selected hidden value="${expressage.expressage_logistics_company}"></option>
-                                        <option class="role" value="0"></option>
-                                        <option class="role" value="2"></option>
-                                        <option class="role" value="1"></option>
+                                        <c:forEach items="${sessionScope.companyList}" var="company">
+                                        <option class="role" value="${company.expressagecompany_name}">${company.expressagecompany_name}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -169,8 +171,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submssit">修改</button>
+                                    <c:if test="${expressage.expressage_delivery_status == '待配送' && user.role == 2}">
+                                    <button class="btn btn-primary" type="submit">修改</button>
                                     <font style="color: red">${error}</font>
+                                    </c:if>
                                 </div>
                             </div>
                         </form>
