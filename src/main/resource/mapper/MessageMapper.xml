@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.expressage.mapper.MessageMapper">
+    <select id="getAllMessage" resultType="Message" parameterType="java.util.Map">
+        select * from message where uid = #{uid}
+        <choose>
+            <when test="type = 1">
+                and read_status = 0
+            </when>
+            <otherwise>
+                and read_status = 1
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="addMessage" parameterType="com.expressage.entity.Message">
+        insert into message (message_info,uid,read_status)value (#{message_info},#{uid},#{read_status})
+    </insert>
+
+    <update id="updateMessage" parameterType="java.lang.String">
+        update message set read_status = 1 where message_id = #{message_id}
+    </update>
+
+    <delete id="deleteMessage" parameterType="java.lang.String">
+        delete message where message_id = #{message_id}
+    </delete>
+
+
+</mapper>

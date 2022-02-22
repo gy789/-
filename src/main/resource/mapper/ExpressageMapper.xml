@@ -58,10 +58,6 @@
         where expressage_id = #{expressage_id}
     </update>
 
-    <insert id="addExpressageStatus" parameterType="com.expressage.entity.ExpressageStatus">
-      insert into expressagestatus(expressage_id,start_status_time) value(#{expressage_id},#{start_status_time})
-    </insert>
-
     <update id="updateExpressageStatus" parameterType="java.lang.String">
         update expressagestatus
         <choose>

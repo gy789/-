@@ -2,12 +2,11 @@ package com.expressage.controller;
 
 import com.expressage.entity.Expressage;
 import com.expressage.entity.ExpressageStatus;
+import com.expressage.entity.Message;
 import com.expressage.entity.Users;
-import com.expressage.mapper.ExpressageMapper;
 import com.expressage.service.ExpressageService;
+import com.expressage.service.MessageService;
 import com.expressage.util.Msg;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +25,13 @@ public class ExpressageController {
     @Autowired(required = false)
     private ExpressageService expressageService;
 
+    @Autowired(required = false)
+    private MessageService messageService;
+
+    /**
+     * 查询我的快递信息
+     * 根据role判断（2:用户查询创建的订单；1：快递员查询配送的订单）
+     * */
     @RequestMapping("/myexpressage")
     public String MyExpressage(HttpServletRequest request,Model model){
         HttpSession session = request.getSession();
@@ -35,6 +41,9 @@ public class ExpressageController {
         return "/expressage/MyExpressage";
     }
 
+    /**
+     * 用户创建快递信息
+     * */
     @RequestMapping("/addexpressageinfo")
     public String AddExpressageInfo(Expressage expressage, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -53,6 +62,9 @@ public class ExpressageController {
 
     }
 
+    /**
+     * 跳转到快递详情页面
+     * */
     @RequestMapping("/skipExpressageInfo")
     public String SkipExpressageInfo(Model model, @RequestParam("expressage_id")String param){
         int expressage_id = Integer.parseInt(param);
@@ -69,14 +81,24 @@ public class ExpressageController {
         return "/expressage/Oneexpressageinfo";
     }
 
+    /**
+     * 更新快递状态接口（同时更新快递状态和更新操作节点）
+     * */
     @RequestMapping("/updateStatus")
     @ResponseBody
     public Msg UpdateStatus(@RequestParam("expressage_id")String expressage_id,@RequestParam("type")String type,
                             @RequestParam("prompt")String prompt,HttpServletRequest request){
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-        String message = "取货地址："+prompt;
-        int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type),message,user);
+        String message_info = "取货地址："+prompt;
+        int flag = expressageService.updateExpressageInfo(Integer.parseInt(expressage_id),Integer.parseInt(type),message_info,user);
+        if(Integer.parseInt(type) == 1 && flag > 0){
+            Message message = new Message();
+            message.setUid(user.getUid());
+            message.setMessage_info(message_info);
+            message.setRead_status(false);
+            messageService.addMessage(message);
+        }
         int flag1 = expressageService.updateExpressageStatus(Integer.parseInt(expressage_id),Integer.parseInt(type));
         if (flag > 0 && flag1 > 0){
             return Msg.success("成功");
