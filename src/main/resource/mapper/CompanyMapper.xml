@@ -4,8 +4,12 @@
     <select id="getAllCompany" resultType="ExpressageCompany" parameterType="java.util.Map">
         select * from expressagecompany
     </select>
-    <delete id="delCompany" parameterType="java.lang.String">
+    <delete id="delCompany" parameterType="java.lang.Integer">
         delete from expressagecompany where expressagecompany_id = #{expressagecompany_id}
     </delete>
+
+    <insert id="addCompanyInfo" parameterType="com.expressage.entity.ExpressageCompany">
+        insert into expressagecompany(expressagecompany_name) value (#{expressagecompany_name})
+    </insert>
 
 </mapper>

@@ -48,7 +48,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <tr class="gradeX">
                                             <td>${company.expressagecompany_name}</td>
                                             <td>
-                                                <a class="btn btn-info btn-rounded" href="/expressage/deleteCompany?expressagecompany_id=${company.expressagecompnay_id}">删除公司</a>
+                                                <a class="btn btn-info btn-rounded" href="javaScript:void(0)">删除公司
+                                                    <span style="display:none;">${company.expressagecompany_id}</span></a>
                                                 <font style="color: red">${error}</font>
                                             </td>
                                         </tr>

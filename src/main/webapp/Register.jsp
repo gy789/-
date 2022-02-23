@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <title> - 登录</title>
+    <title> - 注册</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="expressage/css/bootstrap.min.css" rel="stylesheet">
@@ -34,13 +34,13 @@
 <div class="signinpanel">
     <div class="row">
         <div class="col-sm-12">
-            <form method="post" action="/expressage/login">
+            <form method="post" action="/expressage/register">
                 <h2><p class="m-t-md" style="text-align: center;color: #ec971f;">校园快递代取系统</p></h2>
-                <h3 class="no-margins" style="text-align: center">登录</h3>
+                <h3 class="no-margins" style="text-align: center">注册</h3>
                 <input type="text" name="username" class="form-control uname" placeholder="用户名" />
                 <input type="password" name="password" class="form-control pword m-b" placeholder="密码" />
-                <font style="color: red">${errorMsg}</font><a href="Register.jsp">注册</a>
-                <button class="btn btn-success btn-block">登录</button>
+                <font style="color: red">${errorMsg}</font><a href="Login.jsp">登录</a>
+                <button class="btn btn-success btn-block">注册</button>
             </form>
         </div>
     </div>

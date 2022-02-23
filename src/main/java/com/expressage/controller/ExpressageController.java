@@ -102,7 +102,7 @@ public class ExpressageController {
             Expressage expressage = expressageService.getOneExpressageInfo(Integer.parseInt(expressage_id));
             String info = "你好：取件码"+expressage.getExpressage_code()+"的快递已到达"+prompt+"，请及时查收，谢谢！";
             Message message = new Message();
-            message.setUid(user.getUid());
+            message.setUid(expressage.getUid());
             message.setMessage_info(info);
             message.setRead_status(false);
             messageService.addMessage(message);
@@ -115,9 +115,9 @@ public class ExpressageController {
     }
 
     @RequestMapping("/expressagelist")
-    public String ExpressageList(@RequestParam("type")String type, Model model){
-        List<Expressage> undeliverylist = expressageService.getAllExpressageInfo(Integer.parseInt(type));
-        model.addAttribute("expressages",undeliverylist);
+    public String ExpressageList(@RequestParam("type")String type,@RequestParam(value = "expressage_logistics_company",required = false)String expressage_logistics_company, Model model){
+        List<Expressage> expressagelist = expressageService.getAllExpressageInfo(Integer.parseInt(type),expressage_logistics_company);
+        model.addAttribute("expressages",expressagelist);
         model.addAttribute("type",type);
         return "/expressage/AllExpressages";
     }

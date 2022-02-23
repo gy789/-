@@ -1,23 +1,23 @@
 package com.expressage.entity;
 
 public class ExpressageCompany {
-    private int expressagecompnay_id;
+    private int expressagecompany_id;
     private String expressagecompany_name;
 
     @Override
     public String toString() {
         return "ExpressageCompany{" +
-                "expressagecompnay_id=" + expressagecompnay_id +
+                "expressagecompany_id=" + expressagecompany_id +
                 ", expressagecompany_name='" + expressagecompany_name + '\'' +
                 '}';
     }
 
-    public int getExpressagecompnay_id() {
-        return expressagecompnay_id;
+    public int getExpressagecompany_id() {
+        return expressagecompany_id;
     }
 
-    public void setExpressagecompnay_id(int expressagecompnay_id) {
-        this.expressagecompnay_id = expressagecompnay_id;
+    public void setExpressagecompany_id(int expressagecompany_id) {
+        this.expressagecompany_id = expressagecompany_id;
     }
 
     public String getExpressagecompany_name() {

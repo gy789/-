@@ -4,7 +4,7 @@
     <select id="getAllMessage" resultType="Message" parameterType="java.util.Map">
         select * from message where uid = #{uid}
         <choose>
-            <when test="type = 1">
+            <when test="type == 1">
                 and read_status = 0
             </when>
             <otherwise>

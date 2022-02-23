@@ -10,6 +10,13 @@
             <when test="type == 1">
                 and delivery_id is null
             </when>
+            <when test="type == 2 and role == 1">
+                and expressage_logistics_company = #{expressage_logistics_company}
+                and delivery_id is null
+            </when>
+            <when test="type == 2 and role == 0">
+                and expressage_logistics_company = #{expressage_logistics_company}
+            </when>
         </choose>
     </select>
     <select id="getMyExpressageInfo" resultType="Expressage" parameterType="java.util.Map">
@@ -84,7 +91,7 @@
         select * from expressagestatus where expressage_id = #{expressage_id}
     </select>
 
-    <delete id="delExpressage" parameterType="java.lang.String">
+    <delete id="delExpressage" parameterType="java.lang.Integer">
         delete from expressage where expressage_id = #{expressage_id}
     </delete>
 
