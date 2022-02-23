@@ -6,13 +6,18 @@ import com.expressage.service.MenuService;
 import com.expressage.service.MessageService;
 import com.expressage.service.UserService;
 import com.expressage.util.CreateMenu;
+import com.expressage.util.Msg;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -49,15 +54,18 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public String register(Users user, Model model, HttpServletRequest request){
+    public String register(Users user, Model model, HttpServletRequest request) throws Exception{
         user.setRole("2");
-        int flag = userService.uregister(user);
-        if(flag ==0){
-            model.addAttribute("errorMsg","注册失败");
+        if (user.getPassword().equals("")){
+            model.addAttribute("errorMsg","密码为空，请输入密码");
             return "/Register";
         }
-        else {
-            return "Login";
+        try {
+            userService.uregister(user);
+            return "/Login";
+        }catch (Exception e){
+            model.addAttribute("errorMsg","注册失败(用户名重复)");
+            return "/Register";
         }
     }
 
@@ -68,18 +76,57 @@ public class UserController {
         return "/expressage/allusers";
     }
 
-    /*@RequestMapping("/logout")
+    @RequestMapping("/deleteuser")
     @ResponseBody
-    public Msg logout(HttpSession session,HttpServletRequest request){
-        Users users = (Users)session.getAttribute("user");
-        int flag1 = userService.deleteUsers(users.getUid());//删除用户
-        int flag2 = wishService.delUWish(users.getUid());//删除收藏列表
-        int flag3 = shopCarService.deleteUSC(users.getUid());//删除购物车列表
-        request.getSession().removeAttribute("user");
-        if(flag1 == 0){
-            return Msg.fail("注销失败");
+    public Msg deleteuser(@RequestParam("uid")String uid){
+        int flag = userService.deleteUsers(Integer.parseInt(uid));
+        if(flag > 0){
+            return Msg.success("删除成功");
+        }else {
+            return Msg.fail("删除失败");
         }
-        return Msg.success("注销成功");
-    }*/
+    }
+
+    @RequestMapping("/getusers")
+    public String getusers(@RequestParam("uid")String uid,Model model){
+        Users users = userService.getUsers(Integer.parseInt(uid));
+        if(users == null){
+            model.addAttribute("error","系统异常");
+            return "/expressage/allusers";
+        }
+        model.addAttribute("users",users);
+        return "/expressage/userdetails";
+
+    }
+
+    @RequestMapping("/myinfo")
+    public String MyInfo(Model model,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Users users = (Users)session.getAttribute("user");
+        model.addAttribute("users",users);
+        return "/expressage/userdetails";
+    }
+
+    @RequestMapping("/adduser")
+    public String adduser(Users u, Model model, HttpServletRequest request){
+        int flag = userService.addUser(u);
+        if(flag == 0){
+            model.addAttribute("error","添加失败");
+            return "/admin/addusr";
+        }else {
+            return "redirect:/admin/getalluser";
+        }
+    }
+
+    @RequestMapping("/updateuser")
+    public String updateuser(Users u, Model model, HttpServletRequest request){
+        int flag = userService.updateUser(u);
+        if(flag == 0){
+            model.addAttribute("error","修改失败");
+            return "/expressage/userdetails";
+        }else {
+            return "redirect:/userlist";
+        }
+    }
 
 }

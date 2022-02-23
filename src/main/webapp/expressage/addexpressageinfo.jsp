@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submssit">添加</button>
+                                    <button class="btn btn-primary" type="submit">添加</button>
                                     <font style="color: red">${error}</font>
                                 </div>
                             </div>

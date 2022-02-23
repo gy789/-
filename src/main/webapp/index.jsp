@@ -56,6 +56,16 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-bell"></i> <span class="label label-primary"><c:out value="${fn:length(unreadmessages)}"></c:out></span>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li>
+                                    <a href="mailbox.html">
+                                        <div>
+                                            <i class="fa fa-envelope fa-fw"></i> 您有<c:out value="${fn:length(unreadmessages)}"></c:out>条未读消息
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                            </ul>
                         </a>
                     </li>
                 </ul>

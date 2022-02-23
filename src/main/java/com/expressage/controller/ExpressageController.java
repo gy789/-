@@ -125,7 +125,7 @@ public class ExpressageController {
     @RequestMapping("/updateExpressage")
     public String UpdateExpressage(Expressage expressage,Model model){
         int flag = expressageService.updateExpressage(expressage);
-        if(flag > 1){
+        if(flag > 0){
             return "redirect:/myexpressage";
         }
         model.addAttribute("error","修改失败");
@@ -141,5 +141,6 @@ public class ExpressageController {
         }
         return Msg.fail("失败");
     }
+
 
 }

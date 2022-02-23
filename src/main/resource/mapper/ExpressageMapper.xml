@@ -95,5 +95,12 @@
         delete from expressage where expressage_id = #{expressage_id}
     </delete>
 
+    <update id="updateExpressage" parameterType="com.expressage.entity.Expressage">
+        update expressage set expressage_code = #{expressage_code},expressage_recipient_name = #{expressage_recipient_name},
+        expressage_recipient_phone = #{expressage_recipient_phone},expressage_logistics_company = #{expressage_logistics_company},
+        expressage_delivery_time = #{expressage_delivery_time},expressage_dormitory_number = #{expressage_dormitory_number}
+        where expressage_id = #{expressage_id}
+    </update>
+
 
 </mapper>

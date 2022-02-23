@@ -116,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
 
                     <div class="ibox-content" >
-                        <form method="post" action="<%=basePath%>/expressage/expressage/updateExpressage" class="form-horizontal">
+                        <form method="post" action="<%=basePath%>updateExpressage" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">收件人姓名</label>
 
@@ -146,9 +146,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <label class="col-sm-2 control-label">快递公司</label>
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" name="expressage_logistics_company">
-                                        <option class="role" disabled selected hidden value="${expressage.expressage_logistics_company}"></option>
+                                        <option  disabled selected hidden value="${expressage.expressage_logistics_company}">${expressage.expressage_logistics_company}</option>
                                         <c:forEach items="${sessionScope.companyList}" var="company">
-                                        <option class="role" value="${company.expressagecompany_name}">${company.expressagecompany_name}</option>
+                                        <option value="${company.expressagecompany_name}">${company.expressagecompany_name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -171,7 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <c:if test="${expressage.expressage_delivery_status == '待配送' && user.role == 2}">
+                                    <c:if test="${expressage.expressage_delivery_status == '待配送' && users.role == 2}">
                                     <button class="btn btn-primary" type="submit">修改</button>
                                     <font style="color: red">${error}</font>
                                     </c:if>

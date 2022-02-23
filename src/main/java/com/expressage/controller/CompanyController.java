@@ -31,13 +31,13 @@ public class CompanyController {
     }
 
     @RequestMapping("/deleteCompany")
-    public String DeleteCompany(@RequestParam("expressagecompany_id")String expressagecompany_id,Model model){
+    @ResponseBody
+    public Msg DeleteCompany(@RequestParam("expressagecompany_id")String expressagecompany_id){
         int flag = companyService.delCompany(Integer.parseInt(expressagecompany_id));
         if (flag > 0){
-            return "redirect:/expressage/companylist";
+            return Msg.success("成功");
         }
-        model.addAttribute("error","删除失败");
-        return "/expressage/AllCompany";
+        return Msg.fail("失败");
     }
 
     @RequestMapping("/addCompany")

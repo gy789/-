@@ -50,9 +50,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td>${user.username}</td>
                                             <td>${user.password}</td>
                                             <td>
-                                                <a class="btn btn-info btn-rounded" href="/expressage/deleteCompany?expressagecompany_id=${company.expressagecompany_id}">查看详情</a>
-                                                <a class="btn btn-default btn-rounded" href="javaScript:void(0)">删除用户
-                                                    <span style="display:none;">${myexpressage.expressage_id}</span></a>
+                                                <a class="btn btn-info btn-rounded" href="/expressage/getusers?uid=${user.uid}">查看详情</a>
+                                                <a class="btn btn-danger btn-rounded" href="javaScript:void(0)">删除用户
+                                                    <span style="display:none;">${user.uid}</span></a>
                                                 <font style="color: red">${error}</font>
                                             </td>
                                         </tr>
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 自定义js -->
     <script src="<%=basePath%>/expressage/js/content.js?v=1.0.0"></script>
-    <script src="<%=basePath%>/expressage/js/MyExpressage.js"></script>
+    <script src="<%=basePath%>/expressage/js/User.js"></script>
     <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function () {

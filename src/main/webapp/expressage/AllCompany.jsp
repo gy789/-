@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 自定义js -->
     <script src="<%=basePath%>/expressage/js/content.js?v=1.0.0"></script>
-    <script src="<%=basePath%>/expressage/js/MyExpressage.js"></script>
+    <script src="<%=basePath%>/expressage/js/Company.js"></script>
     <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function () {
