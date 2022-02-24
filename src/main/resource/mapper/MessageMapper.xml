@@ -17,12 +17,18 @@
         insert into message (message_info,uid,read_status)value (#{message_info},#{uid},#{read_status})
     </insert>
 
-    <update id="updateMessage" parameterType="java.lang.String">
-        update message set read_status = 1 where message_id = #{message_id}
+    <update id="updateMessage" parameterType="java.util.List">
+                update message set read_status = 1 where message_id in
+        <foreach collection="array" item="item"  open="(" close=")" separator=",">
+                #{item}
+        </foreach>
     </update>
 
-    <delete id="deleteMessage" parameterType="java.lang.String">
-        delete message where message_id = #{message_id}
+    <delete id="deleteMessage">
+        delete message where message_id in
+        <foreach collection="array" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>
     </delete>
 
 

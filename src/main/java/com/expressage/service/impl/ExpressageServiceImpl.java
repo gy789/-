@@ -61,4 +61,9 @@ public class ExpressageServiceImpl implements ExpressageService {
     public int delExpressage(int expressage_id) {
         return expressageMapper.delExpressage(expressage_id);
     }
+
+    @Override
+    public int getMonExpressage(String firstDay, String lastDay,int type) {
+        return expressageMapper.getMonExpressage(firstDay,lastDay,type);
+    }
 }

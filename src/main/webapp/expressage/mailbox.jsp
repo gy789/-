@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -34,21 +35,15 @@
 
                  
                     <h2>
-                    信息 (16)
+                    信息 (<c:out value="${fn:length(unreadmessages)}"></c:out>)
                 </h2>
                     <div class="mail-tools tooltip-demo m-t-md">
-                        <div class="btn-group pull-right">
-                            <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i>
-                            </button>
-                            <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i>
-                            </button>
 
-                        </div>
                         
-                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="标为已读"><i class="fa fa-eye"></i>
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" id="read" title="标为已读"><i class="fa fa-eye"></i>
                         </button>
                         
-                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i>
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" id="delete" title="删除"><i class="fa fa-trash-o"></i>
                         </button>
 
                     </div>
@@ -57,18 +52,16 @@
 
                     <table class="table table-hover table-mail">
                         <tbody>
+                        <c:forEach items="${unreadmessages}" var="unread">
                             <tr class="unread">
                                 <td class="check-mail">
-                                    <input type="checkbox" class="i-checks">
+                                    <input type="checkbox" value="${unread.message_id}" class="i-checks" >
                                 </td>
-                                <td class="mail-ontact"><a href="mail_detail.html">支付宝</a>
+                                <td class="mail-ontact">${unread.message_info}
                                 </td>
-                                <td class="mail-subject"><a href="mail_detail.html">支付宝提醒</a>
-                                </td>
-                                <td class=""><i class="fa fa-paperclip"></i>
-                                </td>
-                                <td class="text-right mail-date">昨天 10:20</td>
+                                <td class="text-right mail-date">${unread.create_time}</td>
                             </tr>
+                        </c:forEach>
                             
                         </tbody>
                     </table>
@@ -92,6 +85,7 @@
 
     <!-- iCheck -->
     <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <script src="js/Message.js"></script>
     <script>
         $(document).ready(function () {
             $('.i-checks').iCheck({

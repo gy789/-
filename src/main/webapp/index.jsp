@@ -56,9 +56,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-bell"></i> <span class="label label-primary"><c:out value="${fn:length(unreadmessages)}"></c:out></span>
+                        </a>
                             <ul class="dropdown-menu dropdown-alerts">
                                 <li>
-                                    <a href="mailbox.html">
+                                    <a href="<%=basePath%>expressage/mailbox.jsp">
                                         <div>
                                             <i class="fa fa-envelope fa-fw"></i> 您有<c:out value="${fn:length(unreadmessages)}"></c:out>条未读消息
                                         </div>
@@ -66,13 +67,12 @@
                                 </li>
                                 <li class="divider"></li>
                             </ul>
-                        </a>
                     </li>
                 </ul>
             </nav>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe id="J_iframe" width="100%" height="100%" src="/expressage/myexpressage" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            <iframe id="J_iframe" width="100%" height="100%" src="/expressage/index" frameborder="0" data-id="index_v1.html" seamless></iframe>
         </div>
     </div>
     <!--右侧部分结束-->

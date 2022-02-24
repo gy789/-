@@ -25,12 +25,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public int updateMessage(int message_id) {
+    public int updateMessage(String[] message_id) {
         return messageMapper.updateMessage(message_id);
     }
 
     @Override
-    public int deleteMessage(int message_id) {
+    public int deleteMessage(String[] message_id) {
         return messageMapper.deleteMessage(message_id);
     }
 }

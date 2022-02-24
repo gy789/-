@@ -102,5 +102,28 @@
         where expressage_id = #{expressage_id}
     </update>
 
+    <select id="getMonExpressage" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) from expressage
+        <where>
+            <if test="firstDay !=null and firstDay !=''">
+        <![CDATA[AND DATE_FORMAT(create_time, '%Y-%m-%d %h:%i:%s') >=  DATE_FORMAT(#{firstDay}, '%Y-%m-%d %h:%i:%s')]]>
+            </if>
+            <if test="lastDay !=null and lastDay !=''">
+        and <![CDATA[AND DATE_FORMAT(create_time, '%Y-%m-%d %h:%i:%s') <=  DATE_FORMAT(#{lastDay}, '%Y-%m-%d %h:%i:%s')]]>
+            </if>
+        <choose>
+            <when test="type == 0">
+                and 1 = 1
+            </when>
+            <when test="type == 1">
+                and expressage_pay_status == 1
+            </when>
+            <when test="type == 2">
+                and expressage_delivery_status == '待配送'
+            </when>
+        </choose>
+        </where>
+    </select>
+
 
 </mapper>
