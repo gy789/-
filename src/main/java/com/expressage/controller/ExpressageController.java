@@ -115,8 +115,11 @@ public class ExpressageController {
     }
 
     @RequestMapping("/expressagelist")
-    public String ExpressageList(@RequestParam("type")String type,@RequestParam(value = "expressage_logistics_company",required = false)String expressage_logistics_company, Model model){
-        List<Expressage> expressagelist = expressageService.getAllExpressageInfo(Integer.parseInt(type),expressage_logistics_company);
+    public String ExpressageList(HttpServletRequest request,@RequestParam("type")String type,@RequestParam(value = "expressage_logistics_company",required = false)String expressage_logistics_company, Model model){
+        HttpSession session = request.getSession();
+        Users user = (Users)session.getAttribute("user");
+        String role = user.getRole();
+        List<Expressage> expressagelist = expressageService.getAllExpressageInfo(Integer.parseInt(type),expressage_logistics_company,role);
         model.addAttribute("expressages",expressagelist);
         model.addAttribute("type",type);
         return "/expressage/AllExpressages";

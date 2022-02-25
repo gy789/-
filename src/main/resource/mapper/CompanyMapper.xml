@@ -12,4 +12,8 @@
         insert into expressagecompany(expressagecompany_name) value (#{expressagecompany_name})
     </insert>
 
+    <select id="getCompany" resultType="ExpressageCompany" parameterType="java.util.Map">
+        select * from expressagecompany where expressagecompany_id = #{expressagecompany_id}
+    </select>
+
 </mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.expressage.mapper.NewsMapper">
+    <select id="getNewsList" resultType="Expressagenews" parameterType="java.util.Map">
+        select * from expressagenews
+    </select>
+    <select id="getNews" resultType="Expressagenews" parameterType="java.util.Map">
+        select * from expressagenews where expressage_news_id = #{expressage_news_id}
+    </select>
+    <insert id="addNews" parameterType="com.expressage.entity.Expressagenews">
+        insert into expressagenews(expressage_news_title,expressage_news_info) value(#{expressage_news_title},#{expressage_news_info})
+    </insert>
+    <update id="updateNews" parameterType="com.expressage.entity.Expressagenews">
+        update expressagenews set expressage_news_info = #{expressage_news_info},expressage_news_title = #{expressage_news_title}
+        where expressage_news_id = #{expressage_news_id}
+    </update>
+    <delete id="deleteNews" parameterType="java.lang.Integer">
+        delete from expressagenews where expressage_news_id = #{expressage_news_id}
+    </delete>
+</mapper>

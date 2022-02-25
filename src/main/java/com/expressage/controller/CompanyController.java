@@ -33,8 +33,10 @@ public class CompanyController {
     @RequestMapping("/deleteCompany")
     @ResponseBody
     public Msg DeleteCompany(@RequestParam("expressagecompany_id")String expressagecompany_id){
+        ExpressageCompany expressageCompany = companyService.getCompany(Integer.parseInt(expressagecompany_id));
+        int flag_menu = menuService.deleteMenu(expressageCompany.getExpressagecompany_name());
         int flag = companyService.delCompany(Integer.parseInt(expressagecompany_id));
-        if (flag > 0){
+        if (flag > 0 && flag_menu > 0){
             return Msg.success("成功");
         }
         return Msg.fail("失败");
@@ -44,13 +46,13 @@ public class CompanyController {
     public String AddCompany(ExpressageCompany company,Model model){
         int flag_company = companyService.addCompanyInfo(company);
         Menu menu = new Menu();
-        menu.setHref("/expressage/companylist?expressage_logistics_company="+company.getExpressagecompany_name()+"&type=2");
+        menu.setHref("/expressage/expressagelist?expressage_logistics_company="+company.getExpressagecompany_name()+"&type=2");
         menu.setParent_id(9);
         menu.setMenu_name(company.getExpressagecompany_name());
         menu.setRole("0,1");
         int flag_menu = menuService.addMenu(menu);
         if (flag_company > 0 && flag_menu > 0){
-            return "redirect:/expressage/expressage/companylist";
+            return "redirect:/companylist";
         }
         model.addAttribute("error","添加失败");
         return "/expressage/addCompany";

@@ -27,11 +27,6 @@ public class UserController {
     @Autowired(required = false)
     private UserService userService;
 
-    @Autowired(required = false)
-    private MenuService menuService;
-
-    @Autowired(required = false)
-    private MessageService messageService;
 
     @RequestMapping("/login")
     public String Login(Users u, Model model, HttpServletRequest request){
@@ -41,15 +36,10 @@ public class UserController {
             return "Login";
         }else {
             HttpSession session = request.getSession();
-            CreateMenu cm = new CreateMenu(user.getRole(),menuService);
-            List<Message> readmessages = messageService.getAllMessage(user.getUid(),0);
-            List<Message> unreadmessages = messageService.getAllMessage(user.getUid(),1);
-            session.setAttribute("readmessages",readmessages);
-            session.setAttribute("unreadmessages",unreadmessages);
-            session.setAttribute("user", user);
-            session.setAttribute("menu",cm.printMenu());
 
-            return "index";
+            session.setAttribute("user", user);
+
+            return "redirect:/index";
         }
     }
 
@@ -112,21 +102,42 @@ public class UserController {
         int flag = userService.addUser(u);
         if(flag == 0){
             model.addAttribute("error","添加失败");
-            return "/admin/addusr";
+            return "/expressage/addusr";
         }else {
-            return "redirect:/admin/getalluser";
+            return "redirect:/expressage/userlist";
         }
     }
 
     @RequestMapping("/updateuser")
     public String updateuser(Users u, Model model, HttpServletRequest request){
-        int flag = userService.updateUser(u);
-        if(flag == 0){
-            model.addAttribute("error","修改失败");
-            return "/expressage/userdetails";
-        }else {
-            return "redirect:/userlist";
+        HttpSession session = request.getSession();
+        Users user = (Users)session.getAttribute("user");
+        try {
+            if (u.getRole().equals("") && u.getRole() == null){
+
+                u.setRole(user.getRole());
+            }
+
+        }catch (Exception e){
+            u.setRole(user.getRole());
         }
+        int flag = userService.updateUser(u);
+        if (user.getRole().equals("0")) {
+            if (flag == 0) {
+                model.addAttribute("error", "修改失败");
+                return "/expressage/userdetails";
+            } else {
+                return "redirect:/userlist";
+            }
+        }else {
+            if (flag == 0) {
+                model.addAttribute("error", "修改失败");
+                return "/expressage/userdetails";
+            } else {
+                return "Login";
+            }
+        }
+
     }
 
 }

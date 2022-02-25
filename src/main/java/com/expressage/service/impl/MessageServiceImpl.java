@@ -33,4 +33,9 @@ public class MessageServiceImpl implements MessageService {
     public int deleteMessage(String[] message_id) {
         return messageMapper.deleteMessage(message_id);
     }
+
+    @Override
+    public int getMessageNumber(int uid, int type) {
+        return messageMapper.getMessageNumber(uid,type);
+    }
 }

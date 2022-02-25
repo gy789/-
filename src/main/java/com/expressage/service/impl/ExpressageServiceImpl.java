@@ -22,8 +22,8 @@ public class ExpressageServiceImpl implements ExpressageService {
     }
 
     @Override
-    public List<Expressage> getAllExpressageInfo(int type,String expressage_logistics_company) {
-        return expressageMapper.getAllExpressageInfo(type,expressage_logistics_company);
+    public List<Expressage> getAllExpressageInfo(int type,String expressage_logistics_company,String role) {
+        return expressageMapper.getAllExpressageInfo(type,expressage_logistics_company,role);
     }
 
     @Override

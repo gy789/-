@@ -12,6 +12,17 @@
             </otherwise>
         </choose>
     </select>
+    <select id="getMessageNumber" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(message_id) from message where uid = #{uid}
+        <choose>
+            <when test="type == 1">
+                and read_status = 0
+            </when>
+            <otherwise>
+                and read_status = 1
+            </otherwise>
+        </choose>
+    </select>
 
     <insert id="addMessage" parameterType="com.expressage.entity.Message">
         insert into message (message_info,uid,read_status)value (#{message_info},#{uid},#{read_status})
@@ -24,8 +35,8 @@
         </foreach>
     </update>
 
-    <delete id="deleteMessage">
-        delete message where message_id in
+    <delete id="deleteMessage" parameterType="java.util.List">
+        delete  from message where message_id in
         <foreach collection="array" open="(" close=")" item="item" separator=",">
             #{item}
         </foreach>

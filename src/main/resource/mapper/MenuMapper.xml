@@ -7,5 +7,8 @@
     <insert id="addMenu" parameterType="com.expressage.entity.Menu">
         insert into menu(href,parent_id,menu_name,role) value (#{href},#{parent_id},#{menu_name},#{role})
     </insert>
+    <delete id="deleteMenu" parameterType="java.util.Map">
+        delete from menu where menu_name = #{menu_name}
+    </delete>
 
 </mapper>

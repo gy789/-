@@ -28,4 +28,9 @@ public class CompanyServiceImpl implements CompanyService {
     public int addCompanyInfo(ExpressageCompany company) {
         return companyMapper.addCompanyInfo(company);
     }
+
+    @Override
+    public ExpressageCompany getCompany(int expressagecompany_id) {
+        return companyMapper.getCompany(expressagecompany_id);
+    }
 }

@@ -22,4 +22,9 @@ public class MenuServiceImpl implements MenuService {
     public int addMenu(Menu menu) {
         return menuMapper.addMenu(menu);
     }
+
+    @Override
+    public int deleteMenu(String menu_name) {
+        return menuMapper.deleteMenu(menu_name);
+    }
 }

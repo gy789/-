@@ -18,11 +18,11 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="<%=basePath%>expressage/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath%>expressage/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath%>expressage/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="<%=basePath%>expressage/css/animate.css" rel="stylesheet">
+    <link href="<%=basePath%>expressage/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -35,13 +35,14 @@
 
                  
                     <h2>
-                    信息 (<c:out value="${fn:length(unreadmessages)}"></c:out>)
+                    信息 (<c:out value="${fn:length(messageList)}"></c:out>)
                 </h2>
                     <div class="mail-tools tooltip-demo m-t-md">
 
-                        
+                        <c:if test="${type == 1}">
                         <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" id="read" title="标为已读"><i class="fa fa-eye"></i>
                         </button>
+                        </c:if>
                         
                         <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" id="delete" title="删除"><i class="fa fa-trash-o"></i>
                         </button>
@@ -52,14 +53,14 @@
 
                     <table class="table table-hover table-mail">
                         <tbody>
-                        <c:forEach items="${unreadmessages}" var="unread">
+                        <c:forEach items="${messageList}" var="messages">
                             <tr class="unread">
                                 <td class="check-mail">
-                                    <input type="checkbox" value="${unread.message_id}" class="i-checks" >
+                                    <input type="checkbox" value="${messages.message_id}" class="i-checks" >
                                 </td>
-                                <td class="mail-ontact">${unread.message_info}
+                                <td class="mail-ontact">${messages.message_info}
                                 </td>
-                                <td class="text-right mail-date">${unread.create_time}</td>
+                                <td class="text-right mail-date">${messages.create_time}</td>
                             </tr>
                         </c:forEach>
                             
@@ -74,18 +75,18 @@
 
 
     <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="<%=basePath%>expressage/js/jquery.min.js?v=2.1.4"></script>
+    <script src="<%=basePath%>expressage/js/bootstrap.min.js?v=3.3.6"></script>
 
 
 
     <!-- 自定义js -->
-    <script src="js/content.js?v=1.0.0"></script>
+    <script src="<%=basePath%>expressage/js/content.js?v=1.0.0"></script>
 
 
     <!-- iCheck -->
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
-    <script src="js/Message.js"></script>
+    <script src="<%=basePath%>expressage/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="<%=basePath%>expressage/js/Message.js"></script>
     <script>
         $(document).ready(function () {
             $('.i-checks').iCheck({
