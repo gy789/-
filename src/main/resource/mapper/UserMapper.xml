@@ -20,6 +20,6 @@
         select * from users where uid = #{uid}
     </select>
     <insert id="addUser" parameterType="com.expressage.entity.Users">
-        insert into users (username,email,password,role) value (#{username},#{email},#{password},#{role})
+        insert into users (username,password,role) value (#{username},#{password},#{role})
     </insert>
 </mapper>

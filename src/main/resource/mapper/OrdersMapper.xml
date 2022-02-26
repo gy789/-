@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.expressage.mapper.OrdersMapper">
+    <select id="getOrderList" resultType="Orders" parameterType="java.util.Map">
+        select * from orders
+    </select>
+    <insert id="addOrders" parameterType="com.expressage.entity.Orders">
+        insert into orders(order_no,order_amount,order_title,expressage_id,order_status) value (#{order_no},#{order_amount},#{order_title},#{expressage_id},#{order_status})
+    </insert>
+    <select id="getOrder" resultType="Orders" parameterType="java.util.Map">
+        select * from orders where order_no = #{order_no}
+    </select>
+    <delete id="deleteOrders" parameterType="java.lang.Integer">
+        delete from orders where order_id = #{order_id}
+    </delete>
+    <update id="updateStatus" parameterType="java.lang.Integer">
+        update orders set order_status = 1 where order_id = #{order_id}
+    </update>
+
+</mapper>

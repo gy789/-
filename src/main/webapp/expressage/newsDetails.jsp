@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>添加用户</title>
+    <title>新闻详细信息</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -31,40 +31,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>添加用户</h5>
+                        <h5>新闻信息</h5>
                        
                     </div>
                     <div class="ibox-content">
-                        <form method="post" action="/expressage/adduser" class="form-horizontal">
+                        <form method="post" action="/expressage/updateNews" class="form-horizontal">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">用户名</label>
+                                <label class="col-sm-2 control-label">新闻标题</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" name="username"  class="form-control">
+                                    <input type="text" name="expressage_news_title" value="${expressagenews.expressage_news_title}" class="form-control">
+                                    <input type="text" name="expressage_news_id" style="display: none" value="${expressagenews.expressage_news_id}" class="form-control">
                                 </div>
                             </div>
 							<div class="hr-line-dashed"></div>
 							<div class="form-group">
-                                <label class="col-sm-2 control-label">密码</label>
+                                <label class="col-sm-2 control-label">新闻内容</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" name="password"  class="form-control">
+                                    <textarea  name="expressage_news_info"  class="form-control" >${expressagenews.expressage_news_info}</textarea>
                                 </div>
                             </div>
 							<div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">角色</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control m-b" name="role">
-                                        <option class="role" value="0"></option>
-                                        <option class="role" value="2"></option>
-                                        <option class="role" value="1"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submit">添加</button>
+                                    <button class="btn btn-primary" type="submit">修改</button>
                                     <font style="color: red">${error}</font>
                                 </div>
                             </div>

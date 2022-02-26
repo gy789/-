@@ -32,6 +32,7 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-sm-12">
+            <c:if test="${user.role == 0}">
             <div class="row">
                 <div class="col-sm-4">
                     <div class="row row-sm text-center">
@@ -64,8 +65,8 @@
                         </div>
                         <div class="col-xs-6">
                             <div class="panel padder-v item">
-                                <div class="font-thin h1">$129</div>
-                                <span class="text-muted text-xs">近日盈利</span>
+                                <div class="font-thin h1">￥${monExpressage_amount}</div>
+                                <span class="text-muted text-xs">本月盈利</span>
                                 <div class="bottom text-left">
                                     <i class="fa fa-caret-up text-warning m-l-sm"></i>
                                 </div>
@@ -85,6 +86,8 @@
                     </div>
                 </div>
             </div>
+            </c:if>
+
 
             <div class="col-sm-12">
                 <div class="wrapper wrapper-content animated fadeInUp">
@@ -96,7 +99,7 @@
                                 <h4>${news.expressage_news_title}</h4>
                                 <p>${news.expressage_news_info}</p>
                                 <c:if test="${user.role == 0}">
-                                <a href="javaScript:void(0)"><span style="display: none">${news.expressage_news_id}</span><i class="fa fa-trash-o "></i></a>
+                                <a href="javaScript:void(0)"><i class="fa fa-trash-o "><span style="display: none">${news.expressage_news_id}</span></i></a>
                                 </c:if>
                             </div>
                         </li>
@@ -118,6 +121,7 @@
     <script src="expressage/js/plugins/flot/jquery.flot.pie.js"></script>
     <!-- 自定义js -->
     <script src="expressage/js/content.js"></script>
+    <script src="expressage/js/News.js"></script>
     <!--flotdemo-->
     <script type="text/javascript">
         $(function() {

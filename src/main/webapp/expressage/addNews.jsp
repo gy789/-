@@ -13,15 +13,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>添加用户</title>
+    <title>添加新闻</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="<%=basePath%>/expressage/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="<%=basePath%>/expressage/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="<%=basePath%>/expressage/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="<%=basePath%>/expressage/css/animate.css" rel="stylesheet">
-    <link href="<%=basePath%>/expressage/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -31,37 +31,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>添加用户</h5>
+                        <h5>新闻信息填写</h5>
                        
                     </div>
                     <div class="ibox-content">
-                        <form method="post" action="/expressage/adduser" class="form-horizontal">
+                        <form method="post" action="<%=basePath%>addnews" class="form-horizontal">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">用户名</label>
+                                <label class="col-sm-2 control-label">新闻标题</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" name="username"  class="form-control">
+                                    <input type="text" name="expressage_news_title"  class="form-control">
                                 </div>
                             </div>
 							<div class="hr-line-dashed"></div>
 							<div class="form-group">
-                                <label class="col-sm-2 control-label">密码</label>
+                                <label class="col-sm-2 control-label">新闻内容</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" name="password"  class="form-control">
+                                    <textarea  name="expressage_news_info"  class="form-control" ></textarea>
                                 </div>
                             </div>
 							<div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">角色</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control m-b" name="role">
-                                        <option class="role" value="0"></option>
-                                        <option class="role" value="2"></option>
-                                        <option class="role" value="1"></option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <button class="btn btn-primary" type="submit">添加</button>
@@ -76,15 +66,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 
     <!-- 全局js -->
-    <script src="<%=basePath%>/expressage/js/jquery.min.js?v=2.1.4"></script>
-    <script src="<%=basePath%>/expressage/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="<%=basePath%>/expressage/js/User.js"></script>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
 
     <!-- 自定义js -->
-    <script src="<%=basePath%>/expressage/js/content.js?v=1.0.0"></script>
+    <script src="js/content.js?v=1.0.0"></script>
 
     <!-- iCheck -->
-    <script src="<%=basePath%>/expressage/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.i-checks').iCheck({

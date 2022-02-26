@@ -93,7 +93,8 @@ public class UserController {
     public String MyInfo(Model model,HttpServletRequest request){
         HttpSession session = request.getSession();
         Users users = (Users)session.getAttribute("user");
-        model.addAttribute("users",users);
+        Users u = userService.getUsers(users.getUid());
+        model.addAttribute("users",u);
         return "/expressage/userdetails";
     }
 
@@ -134,7 +135,7 @@ public class UserController {
                 model.addAttribute("error", "修改失败");
                 return "/expressage/userdetails";
             } else {
-                return "Login";
+                return "redirect:myinfo";
             }
         }
 

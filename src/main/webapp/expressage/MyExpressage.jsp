@@ -81,8 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         </a>
                                                     </c:when>
                                                     <c:when test="${myexpressage.expressage_recipient_status == true && myexpressage.expressage_pay_status == '待支付'}">
-                                                        <a class="btn btn-primary  btn-rounded" href="javaScript:void(0)">确认支付
-                                                            <span style="display:none;">${myexpressage.expressage_id}</span>
+                                                        <a class="btn btn-primary  btn-rounded" target="_blank" href="/expressage/alipay?expressage_id=${myexpressage.expressage_id}">确认支付
                                                         </a>
                                                     </c:when>
                                                     <c:when test="${myexpressage.expressage_delivery_status == '待配送'}">

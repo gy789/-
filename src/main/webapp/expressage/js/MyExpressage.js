@@ -13,8 +13,7 @@ $(document).ready(function () {
                        type: 2
                    },
                    success: function () {
-                       alert("收货成功");
-                       //跳转支付页面
+                       window.open("/expressage/alipay?expressage_id="+expressage_id);
                    },
                    error: function () {
                        alert("系统异常，收货失败");
@@ -81,7 +80,7 @@ $(document).ready(function () {
     })
 });
 
-/*我要配送按钮点击事件*/
+/*删除按钮点击事件*/
 $(document).ready(function () {
     $('.btn-warning').each(function () {
         $(this).click(function () {
@@ -105,4 +104,20 @@ $(document).ready(function () {
             }
         })
     })
+
+    // 页面的 visibility 属性可能返回三种状态
+// prerender，visible 和 hidden
+    let pageVisibility = document.visibilityState;
+// 监听 visibility change 事件
+    document.addEventListener('visibilitychange', function() {
+        // 页面变为不可见时触发
+        if (document.visibilityState == 'hidden') {
+            var bool = confirm("是否支付成功？");
+            if (bool){
+                window.location.reload();
+            }
+        }
+
+    });
 });
+

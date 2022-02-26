@@ -171,7 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <c:if test="${expressage.expressage_delivery_status == '待配送' && users.role == 2}">
+                                    <c:if test="${expressage.expressage_delivery_status == '待配送' && user.role == 2}">
                                     <button class="btn btn-primary" type="submit">修改</button>
                                     <font style="color: red">${error}</font>
                                     </c:if>

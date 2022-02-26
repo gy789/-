@@ -119,7 +119,7 @@ public class ExpressageController {
         HttpSession session = request.getSession();
         Users user = (Users)session.getAttribute("user");
         String role = user.getRole();
-        List<Expressage> expressagelist = expressageService.getAllExpressageInfo(Integer.parseInt(type),expressage_logistics_company,role);
+        List<Expressage> expressagelist = expressageService.getAllExpressageInfo(Integer.parseInt(type),expressage_logistics_company,role,user);
         model.addAttribute("expressages",expressagelist);
         model.addAttribute("type",type);
         return "/expressage/AllExpressages";

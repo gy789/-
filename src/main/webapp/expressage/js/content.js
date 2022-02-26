@@ -22,6 +22,10 @@ if (top == this) {
     $('body').append(gohome);
 }
 
+$("body").bind("beforeunload",function () {
+
+});
+
 //animation.css
 function animationHover(element, animation) {
     element = $(element);

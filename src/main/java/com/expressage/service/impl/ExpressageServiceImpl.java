@@ -22,8 +22,13 @@ public class ExpressageServiceImpl implements ExpressageService {
     }
 
     @Override
-    public List<Expressage> getAllExpressageInfo(int type,String expressage_logistics_company,String role) {
-        return expressageMapper.getAllExpressageInfo(type,expressage_logistics_company,role);
+    public List<Expressage> getAllExpressageInfo(int type,String expressage_logistics_company,String role,Users users) {
+        return expressageMapper.getAllExpressageInfo(type,expressage_logistics_company,role,users);
+    }
+
+    @Override
+    public double getMonExpressageAmount(String firstDay, String lastDay) {
+        return expressageMapper.getMonExpressageAmount(firstDay,lastDay);
     }
 
     @Override

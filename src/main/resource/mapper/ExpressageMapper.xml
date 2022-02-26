@@ -12,7 +12,7 @@
             </when>
             <when test="type == 2 and role == 1">
                 and expressage_logistics_company = #{expressage_logistics_company}
-                and delivery_id is null
+                and delivery_id = #{uid}
             </when>
             <when test="type == 2 and role == 0">
                 and expressage_logistics_company = #{expressage_logistics_company}
@@ -110,12 +110,17 @@
                 and 1 = 1
             </when>
             <when test="type == 1">
-                and expressage_pay_status = 1
+                and expressage_pay_status = '已支付'
             </when>
             <when test="type == 2">
                 and expressage_delivery_status = '待配送'
             </when>
         </choose>
+    </select>
+
+    <select id="getMonExpressageAmount" resultType="java.lang.Double" parameterType="java.util.Map">
+        select sum(order_amount) from orders where date_format(create_time,'%Y-%m-%d %H:%i:%s') between
+        date_format(#{firstDay},'%Y-%m-%d %H:%i:%s') and date_format(#{lastDay},'%Y-%m-%d %H:%i:%s')
     </select>
 
 

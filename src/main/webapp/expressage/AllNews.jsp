@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> 快递信息</title>
+    <title> 新闻列表</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -32,54 +32,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>快递列表</h5>
+                            <h5>新闻列表</h5>
                         </div>
                         <div class="ibox-content">
 
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                         <tr>
-                                            <th>收件人</th>
-                                            <th>手机号</th>
-                                            <th>取货码</th>
-                                            <th>物流公司</th>
-                                            <th>配送状态</th>
-                                            <th>支付状态</th>
-                                            <th>留言信息</th>
+                                            <th>标题</th>
+                                            <th>内容</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${expressages}" var="expressage">
+                                    <c:forEach items="${newslist}" var="news">
                                         <tr class="gradeX">
-                                            <td>${expressage.expressage_recipient_name}</td>
-                                            <td>${expressage.expressage_recipient_phone}
-                                            </td>
-                                            <td>${expressage.expressage_code}</td>
-                                            <td class="center">${expressage.expressage_logistics_company}</td>
-                                            <td class="center">${expressage.expressage_delivery_status}</td>
-                                            <td class="center">${expressage.expressage_pay_status}</td>
-                                            <td class="center">${expressage.expressage_message}</td>
+                                            <td>${news.expressage_news_title}</td>
+                                            <td>${news.expressage_news_info}</td>
                                             <td>
-                                                <a class="btn btn-info btn-rounded" href="/expressage/skipExpressageInfo?expressage_id=${expressage.expressage_id}">查看详情</a>
-                                                <c:if test="${user.role == 1}">
-                                                    <a class="btn btn-danger btn-rounded" href="javaScript:void(0)">我要配送
-                                                    <span style="display:none;">${expressage.expressage_id}</span>
-                                                    </a>
-                                                </c:if>
+                                                <a class="btn btn-info btn-rounded" href="/expressage/skipnews?expressage_news_id=${news.expressage_news_id}">查看详情</a>
+                                                <a class="btn btn-success btn-rounded" href="javaScript:void(0)">删除新闻
+                                                    <span style="display:none;">${company.expressagecompany_id}</span></a>
+                                                <font style="color: red">${error}</font>
                                             </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>收件人</th>
-                                        <th>手机号</th>
-                                        <th>取货码</th>
-                                        <th>物流公司</th>
-                                        <th>配送状态</th>
-                                        <th>支付状态</th>
-                                        <th>留言信息</th>
+                                        <th>标题</th>
+                                        <th>内容</th>
                                         <th>操作</th>
                                     </tr>
                                 </tfoot>
@@ -100,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 自定义js -->
     <script src="<%=basePath%>/expressage/js/content.js?v=1.0.0"></script>
-    <script src="<%=basePath%>/expressage/js/MyExpressage.js"></script>
+    <script src="<%=basePath%>/expressage/js/News.js"></script>
     <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function () {
