@@ -3,7 +3,7 @@ package com.expressage.entity;
 public class Orders {
     private int order_id;
     private String order_no;
-    private double order_amount;
+    private String order_amount;
     private String order_title;
     private int expressage_id;
     private String create_time;
@@ -64,11 +64,11 @@ public class Orders {
         this.order_no = order_no;
     }
 
-    public double getOrder_amount() {
+    public String getOrder_amount() {
         return order_amount;
     }
 
-    public void setOrder_amount(double order_amount) {
+    public void setOrder_amount(String order_amount) {
         this.order_amount = order_amount;
     }
 

@@ -11,7 +11,7 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 25/02/2022 00:35:06
+ Date: 28/02/2022 01:00:55
 */
 
 SET NAMES utf8mb4;
@@ -38,19 +38,13 @@ CREATE TABLE `expressage`  (
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`expressage_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of expressage
 -- ----------------------------
-INSERT INTO `expressage` VALUES (2, '32323', 'eeee', '15645', '0', '2333', '33', NULL, '已配送', 0, '待支付', 4, 1, '2022-02-18 17:05:17', '2022-02-20 21:14:27');
-INSERT INTO `expressage` VALUES (3, '211', '第三方', '1561651', '2', '得到的', '2', NULL, '已配送', 1, '待支付', 5, 1, '2022-02-18 21:54:36', '2022-02-20 20:23:34');
-INSERT INTO `expressage` VALUES (4, '5555', '颠三倒四', '1561651', '0', '得到的', '2', '取货地址：3号楼会客室', '已配送', 1, '待支付', 4, 1, '2022-02-19 18:37:54', '2022-02-22 00:21:01');
-INSERT INTO `expressage` VALUES (5, '343', '从是抽象方法付付 ', '4343', '2', '得到的', '2', NULL, '已配送', 1, '支付成功', 5, 1, '2022-02-19 18:41:38', '2022-02-20 20:23:37');
-INSERT INTO `expressage` VALUES (6, '34555', '孤独感放到', '4343', '0', '得到的', '2', NULL, '已配送', 0, '待支付', 4, 1, '2022-02-19 18:42:57', '2022-02-20 21:05:55');
-INSERT INTO `expressage` VALUES (7, '211', '范德萨范德萨发的', '333', '2', '得到的', '44', NULL, '已配送', 0, '待支付', 4, 1, '2022-02-19 22:07:51', '2022-02-20 22:40:29');
-INSERT INTO `expressage` VALUES (9, '569998', '孤独感放到第三方', '43434', '京东', '得到的', '44', NULL, '待配送', 0, '待支付', NULL, 1, '2022-02-22 21:15:48', '2022-02-23 21:56:20');
-INSERT INTO `expressage` VALUES (10, '343333', '第三方丰东股份dd', '156165122', NULL, '得到的', '55', '取货地址：4号楼门卫', '已配送', 1, '待支付', 4, 1, '2022-02-22 21:23:11', '2022-02-22 21:24:29');
+INSERT INTO `expressage` VALUES (12, '232333', '顶顶顶顶', '222222', '京东', '下午4:00前', '5号楼', '取货地址：5号楼门卫', '已配送', 1, '待支付', 4, 1, '2022-02-27 00:56:49', '2022-02-27 01:08:25');
+INSERT INTO `expressage` VALUES (13, '55554', '张三', '8888888', '京东', '下午六点', '5号楼', '取货地址：五号楼门卫', '已配送', 1, '待支付', 4, 1, '2022-02-27 22:51:52', '2022-02-27 23:19:44');
 
 -- ----------------------------
 -- Table structure for expressagecompany
@@ -60,16 +54,13 @@ CREATE TABLE `expressagecompany`  (
   `expressagecompany_id` int(11) NOT NULL AUTO_INCREMENT,
   `expressagecompany_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`expressagecompany_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of expressagecompany
 -- ----------------------------
-INSERT INTO `expressagecompany` VALUES (1, '京东');
-INSERT INTO `expressagecompany` VALUES (2, '圆通');
-INSERT INTO `expressagecompany` VALUES (3, '中通');
-INSERT INTO `expressagecompany` VALUES (4, '韵达');
-INSERT INTO `expressagecompany` VALUES (5, '顺丰');
+INSERT INTO `expressagecompany` VALUES (7, '京东');
+INSERT INTO `expressagecompany` VALUES (8, '中通');
 
 -- ----------------------------
 -- Table structure for expressagenews
@@ -79,8 +70,10 @@ CREATE TABLE `expressagenews`  (
   `expressage_news_id` int(11) NOT NULL AUTO_INCREMENT,
   `expressage_news_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `expressage_news_info` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`expressage_news_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for expressagestatus
@@ -95,14 +88,13 @@ CREATE TABLE `expressagestatus`  (
   `recipient_status_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `compelete_pay_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`status_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of expressagestatus
 -- ----------------------------
-INSERT INTO `expressagestatus` VALUES (2, 2, '2022-02-21 22:25:14', '2022-02-21 22:36:34', NULL, NULL, NULL);
-INSERT INTO `expressagestatus` VALUES (3, 9, '2022-02-22 21:15:48', NULL, NULL, NULL, NULL);
-INSERT INTO `expressagestatus` VALUES (4, 10, '2022-02-22 21:23:11', '2022-02-22 21:23:37', '2022-02-22 21:24:03', '2022-02-22 21:24:29', NULL);
+INSERT INTO `expressagestatus` VALUES (6, 12, '2022-02-27 00:56:49', '2022-02-27 01:04:06', '2022-02-27 01:07:59', '2022-02-27 01:08:57', NULL);
+INSERT INTO `expressagestatus` VALUES (7, 13, '2022-02-27 22:51:52', '2022-02-27 23:18:15', '2022-02-27 23:19:00', '2022-02-27 23:19:44', NULL);
 
 -- ----------------------------
 -- Table structure for menu
@@ -115,7 +107,7 @@ CREATE TABLE `menu`  (
   `menu_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `role` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of menu
@@ -129,16 +121,15 @@ INSERT INTO `menu` VALUES (6, '/expressage/userlist', 2, '全部用户', '0');
 INSERT INTO `menu` VALUES (7, '/expressage/expressage/addexpressageinfo.jsp', 1, '添加快递信息', '2');
 INSERT INTO `menu` VALUES (8, '/expressage/Login.jsp', 3, '退出系统', '0,1,2');
 INSERT INTO `menu` VALUES (9, '/expressage/companylist', 1, '快递公司', '0,1');
-INSERT INTO `menu` VALUES (10, NULL, 9, '京东', '0,1');
-INSERT INTO `menu` VALUES (11, NULL, 9, '中通', '0,1');
-INSERT INTO `menu` VALUES (12, NULL, 9, '圆通', '0,1');
 INSERT INTO `menu` VALUES (13, '/expressage/expressagelist?type=1', 1, '待配送快递', '1');
 INSERT INTO `menu` VALUES (14, '/expressage/expressagelist?type=0', 1, '全部快递列表', '0');
 INSERT INTO `menu` VALUES (15, '/expressage/expressage/addCompany.jsp', 1, '添加快递公司', '0');
-INSERT INTO `menu` VALUES (16, '/expressage/companylist?expressage_logistics_company=韵达&type=2', 9, '韵达', '0,1');
-INSERT INTO `menu` VALUES (17, '/expressage/companylist?expressage_logistics_company=顺丰&type=2', 9, '顺丰', '0,1');
-INSERT INTO `menu` VALUES (18, '/expressage/companylist', 9, '快递公司列表', '0');
-INSERT INTO `menu` VALUES (19, '/expressage/expressage/adduser', 2, '添加用户', '0');
+INSERT INTO `menu` VALUES (18, '/expressage/companylist', 1, '快递公司列表', '0');
+INSERT INTO `menu` VALUES (19, '/expressage/expressage/adduser.jsp', 2, '添加用户', '0');
+INSERT INTO `menu` VALUES (21, '/expressage/expressagelist?expressage_logistics_company=京东&type=2', 9, '京东', '0,1');
+INSERT INTO `menu` VALUES (22, '/expressage/expressage/addNews.jsp', 3, '添加新闻', '0');
+INSERT INTO `menu` VALUES (23, '/expressage/newsList', 3, '新闻列表', '0');
+INSERT INTO `menu` VALUES (24, '/expressage/expressagelist?expressage_logistics_company=中通&type=2', 9, '中通', '0,1');
 
 -- ----------------------------
 -- Table structure for message
@@ -152,13 +143,42 @@ CREATE TABLE `message`  (
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of message
 -- ----------------------------
-INSERT INTO `message` VALUES (1, '取货地址：4号楼门卫', '1', 1, '2022-02-24 19:37:38', '2022-02-24 22:02:50');
-INSERT INTO `message` VALUES (2, '取货地址：4号楼门卫', '1', 0, '2022-02-24 22:24:28', '2022-02-24 22:53:09');
+INSERT INTO `message` VALUES (4, '你好：取件码232333的快递已到达5号楼门卫，请及时查收，谢谢！', '1', 0, '2022-02-27 01:07:58', '2022-02-27 01:07:58');
+INSERT INTO `message` VALUES (5, '你好：取件码55554的快递已到达五号楼门卫，请及时查收，谢谢！', '1', 0, '2022-02-27 23:19:00', '2022-02-27 23:19:00');
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_no` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `order_amount` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `order_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `expressage_id` int(11) NULL DEFAULT NULL,
+  `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `order_status` tinyint(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (29, '1645895306003', '0', '收货人：顶顶顶顶 取货码：232333', 12, '2022-02-27 01:08:26', '2022-02-27 01:08:26', NULL);
+INSERT INTO `orders` VALUES (30, '1645895337801', '0', '收货人：顶顶顶顶 取货码：232333', 12, '2022-02-27 01:08:57', '2022-02-27 01:08:57', NULL);
+INSERT INTO `orders` VALUES (31, '1645895453564', '0', '收货人：顶顶顶顶 取货码：232333', 12, '2022-02-27 01:10:53', '2022-02-27 01:10:53', NULL);
+INSERT INTO `orders` VALUES (32, '1645895456085', '0', '收货人：顶顶顶顶 取货码：232333', 12, '2022-02-27 01:10:56', '2022-02-27 01:10:56', NULL);
+INSERT INTO `orders` VALUES (33, '1645895460259', '0', '收货人：顶顶顶顶 取货码：232333', 12, '2022-02-27 01:11:00', '2022-02-27 01:11:00', NULL);
+INSERT INTO `orders` VALUES (34, '1645975202537', '0', '收货人：张三 取货码：55554', 13, '2022-02-27 23:20:02', '2022-02-27 23:20:02', 0);
+INSERT INTO `orders` VALUES (35, '1645979629021', '0', '收货人：张三 取货码：55554', 13, '2022-02-28 00:33:49', '2022-02-28 00:33:49', 0);
+INSERT INTO `orders` VALUES (36, '1645979660766', '0.01', '收货人：张三 取货码：55554', 13, '2022-02-28 00:34:20', '2022-02-28 00:38:18', 1);
+INSERT INTO `orders` VALUES (37, '1645979694417', '0', '收货人：张三 取货码：55554', 13, '2022-02-28 00:34:54', '2022-02-28 00:36:55', 1);
 
 -- ----------------------------
 -- Table structure for users
@@ -171,16 +191,16 @@ CREATE TABLE `users`  (
   `role` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`uid`) USING BTREE,
   INDEX `userId`(`uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES (1, 'zhangsan', '123456', 2);
 INSERT INTO `users` VALUES (2, 'admin', '123456', 0);
-INSERT INTO `users` VALUES (3, 'lisi', '123456', 1);
 INSERT INTO `users` VALUES (4, 'kuaidiyuan1', '123456', 1);
 INSERT INTO `users` VALUES (5, 'kuaidiyuan2', '123456', 1);
+INSERT INTO `users` VALUES (9, 'kuaidiyuan3', '123456', 1);
 
 -- ----------------------------
 -- Triggers structure for table expressage

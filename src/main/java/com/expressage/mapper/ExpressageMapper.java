@@ -19,5 +19,5 @@ public interface ExpressageMapper {
     int updateExpressage(Expressage expressage);//修改快递详细信息
     int delExpressage(int expressage_id);//删除快递详细（取消快递）
     int getMonExpressage(@Param("firstDay")String firstDay,@Param("lastDay")String lastDay,@Param("type")int type);//获取本月的快递,type{0: 全部，1: 已完成，2：待配送}
-    double getMonExpressageAmount(@Param("firstDay")String firstDay,@Param("lastDay")String lastDay);//获取本月营销额
+    String getMonExpressageAmount(@Param("firstDay")String firstDay,@Param("lastDay")String lastDay);//获取本月营销额
 }

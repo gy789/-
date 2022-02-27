@@ -76,7 +76,7 @@ public class OrderController {
             orders.setExpressage_id(Integer.parseInt(expressage_id));
             orders.setOrder_no(out_trade_no);
             orders.setOrder_title(subject);
-            orders.setOrder_amount(Double.valueOf(total_amount));
+            orders.setOrder_amount(total_amount);
             orders.setOrder_status(0);
             int flag = ordersService.addOrders(orders);
 

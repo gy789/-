@@ -27,7 +27,7 @@ public class ExpressageServiceImpl implements ExpressageService {
     }
 
     @Override
-    public double getMonExpressageAmount(String firstDay, String lastDay) {
+    public String getMonExpressageAmount(String firstDay, String lastDay) {
         return expressageMapper.getMonExpressageAmount(firstDay,lastDay);
     }
 

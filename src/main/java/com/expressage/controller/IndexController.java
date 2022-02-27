@@ -62,11 +62,11 @@ public class IndexController {
         int monExpressage_number = expressageService.getMonExpressage(firstDay,lastDay,0);
         int monExpressage_compelete_number = expressageService.getMonExpressage(firstDay,lastDay,1);
         int monExpressage_wait_number = expressageService.getMonExpressage(firstDay,lastDay,2);
-        Double monExpressage_amount = 0.00;
+        String monExpressage_amount = "0.00";
         try{
             monExpressage_amount = expressageService.getMonExpressageAmount(firstDay,lastDay);
         }catch (Exception e){
-            monExpressage_amount = 0.00;
+            monExpressage_amount = "0.00";
         }
 
         List<Expressagenews> newslist = newsService.getNewsList();

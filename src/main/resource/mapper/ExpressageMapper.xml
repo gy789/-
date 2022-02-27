@@ -12,7 +12,7 @@
             </when>
             <when test="type == 2 and role == 1">
                 and expressage_logistics_company = #{expressage_logistics_company}
-                and delivery_id = #{uid}
+                and delivery_id = #{users.uid}
             </when>
             <when test="type == 2 and role == 0">
                 and expressage_logistics_company = #{expressage_logistics_company}
@@ -118,8 +118,8 @@
         </choose>
     </select>
 
-    <select id="getMonExpressageAmount" resultType="java.lang.Double" parameterType="java.util.Map">
-        select sum(order_amount) from orders where date_format(create_time,'%Y-%m-%d %H:%i:%s') between
+    <select id="getMonExpressageAmount" resultType="java.lang.String" parameterType="java.util.Map">
+        select sum(order_amount) from orders where order_status = 1 and date_format(create_time,'%Y-%m-%d %H:%i:%s') between
         date_format(#{firstDay},'%Y-%m-%d %H:%i:%s') and date_format(#{lastDay},'%Y-%m-%d %H:%i:%s')
     </select>
 

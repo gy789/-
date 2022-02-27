@@ -105,7 +105,7 @@ public class UserController {
             model.addAttribute("error","添加失败");
             return "/expressage/addusr";
         }else {
-            return "redirect:/expressage/userlist";
+            return "redirect:userlist";
         }
     }
 
