@@ -119,7 +119,7 @@
     </select>
 
     <select id="getMonExpressageAmount" resultType="java.lang.String" parameterType="java.util.Map">
-        select sum(order_amount) from orders where order_status = 1 and date_format(create_time,'%Y-%m-%d %H:%i:%s') between
+        select COALESCE(sum(order_amount),0.00) order_amount from orders where order_status = 1 and date_format(create_time,'%Y-%m-%d %H:%i:%s') between
         date_format(#{firstDay},'%Y-%m-%d %H:%i:%s') and date_format(#{lastDay},'%Y-%m-%d %H:%i:%s')
     </select>
 

@@ -44,7 +44,7 @@ public class Utils {
         String day_first = df.format(gcLast.getTime());
         StringBuffer str = new StringBuffer().append(day_first);
         if(timeFlag){
-            str.append(" 00:00:00");
+            str.append(" 23:59:59");
         }
         return str.toString();
     }

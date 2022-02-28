@@ -2,6 +2,7 @@ package com.expressage.controller;
 
 import com.expressage.entity.Expressage;
 import com.expressage.entity.Expressagenews;
+import com.expressage.entity.Orders;
 import com.expressage.entity.Users;
 import com.expressage.mapper.MessageMapper;
 import com.expressage.service.ExpressageService;
@@ -66,7 +67,7 @@ public class IndexController {
         try{
             monExpressage_amount = expressageService.getMonExpressageAmount(firstDay,lastDay);
         }catch (Exception e){
-            monExpressage_amount = "0.00";
+            monExpressage_amount= "0.00";
         }
 
         List<Expressagenews> newslist = newsService.getNewsList();
