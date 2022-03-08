@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td class="center">${expressage.expressage_message}</td>
                                             <td>
                                                 <a class="btn btn-info btn-rounded" href="/expressage/skipExpressageInfo?expressage_id=${expressage.expressage_id}">查看详情</a>
-                                                <c:if test="${user.role == 1 && expressage.delivery_id == null}">
+                                                <c:if test="${user.role == 1 && expressage.delivery_id == ''}">
                                                     <a class="btn btn-danger btn-rounded" href="javaScript:void(0)">我要配送
                                                     <span style="display:none;">${expressage.expressage_id}</span>
                                                     </a>
