@@ -35,7 +35,6 @@ public class OrderController {
     private OrdersService ordersService;
 
     @RequestMapping("/alipay")
-    @ResponseBody
     public void GoPay(HttpServletRequest request, HttpServletResponse response){
         String expressage_id = request.getParameter("expressage_id");
         Expressage expressage = expressageService.getOneExpressageInfo(Integer.parseInt(expressage_id));

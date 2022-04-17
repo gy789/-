@@ -49,9 +49,9 @@ public class NewsController {
     public String updateNews(Expressagenews news, Model model, HttpServletRequest request){
         int flag = newsService.updateNews(news);
         if (flag > 0){
-            return "/expressage/allNews";
+            return "/expressage/AllNews";
         }
-        return "/expressage/newsdetails";
+        return "/expressage/newsDetails";
     }
 
     @RequestMapping("/skipnews")

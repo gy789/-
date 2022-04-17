@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td>
                                                 <a class="btn btn-info btn-rounded" href="/expressage/skipnews?expressage_news_id=${news.expressage_news_id}">查看详情</a>
                                                 <a class="btn btn-success btn-rounded" href="javaScript:void(0)">删除新闻
-                                                    <span style="display:none;">${company.expressagecompany_id}</span></a>
+                                                    <span style="display:none;">${news.expressage_news_id}</span></a>
                                                 <font style="color: red">${error}</font>
                                             </td>
                                         </tr>
